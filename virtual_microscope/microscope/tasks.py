@@ -87,8 +87,8 @@ def convert_to_tiles(self,input_path, output_path, idOpenSLide, idSlide,tile_siz
                         tile_filename = os.path.join(row_folder, f"{col + xy_level_folder}.jpg")
                         tile.save(tile_filename, "JPEG")
                         
-                #         print(f"Saved: {tile_filename}")
-                # print(f"row: {row}")
+                        print(f"Saved: {tile_filename}")
+                print(f"row: {row}")
         
         rawSlide = OpenSlide.objects.get(id=idOpenSLide)
         microscopeSlide = Slide.objects.get(id=idSlide)
