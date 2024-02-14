@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Projects package &#8212; documentación de Microscopio Virtual - 1.0.0</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/scrolls.css?v=b5349046" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script src="../_static/documentation_options.js?v=36c4ab74"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../_static/theme_extras.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+  </head><body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="../index.html"
+          title="back to the documentation overview"><span>Projects package</span></a></h1>
+      </div>
+      <div class="relnav" role="navigation" aria-label="related navigation">
+        <a href="#">Projects package</a>
+      </div>
+      <div id="contentwrapper">
+        <div id="toc" role="navigation" aria-label="table of contents navigation">
+          <h3>Tabla de contenido</h3>
+          <ul>
+<li><a class="reference internal" href="#">Projects package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-Projects.admin">Projects.admin module</a></li>
+<li><a class="reference internal" href="#module-Projects.apps">Projects.apps module</a><ul>
+<li><a class="reference internal" href="#Projects.apps.ProjectsConfig"><code class="docutils literal notranslate"><span class="pre">ProjectsConfig</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.apps.ProjectsConfig.name"><code class="docutils literal notranslate"><span class="pre">ProjectsConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Projects.consumers">Projects.consumers module</a><ul>
+<li><a class="reference internal" href="#Projects.consumers.ChatConsumer"><code class="docutils literal notranslate"><span class="pre">ChatConsumer</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.consumers.ChatConsumer.chat_message"><code class="docutils literal notranslate"><span class="pre">ChatConsumer.chat_message()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.consumers.ChatConsumer.connect"><code class="docutils literal notranslate"><span class="pre">ChatConsumer.connect()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.consumers.ChatConsumer.disconnect"><code class="docutils literal notranslate"><span class="pre">ChatConsumer.disconnect()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.consumers.ChatConsumer.receive"><code class="docutils literal notranslate"><span class="pre">ChatConsumer.receive()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Projects.decorators">Projects.decorators module</a><ul>
+<li><a class="reference internal" href="#Projects.decorators.project_collaborator_required"><code class="docutils literal notranslate"><span class="pre">project_collaborator_required()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.decorators.user_is_project_collaborator"><code class="docutils literal notranslate"><span class="pre">user_is_project_collaborator()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Projects.forms">Projects.forms module</a><ul>
+<li><a class="reference internal" href="#Projects.forms.MensajeForm"><code class="docutils literal notranslate"><span class="pre">MensajeForm</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.forms.MensajeForm.Meta"><code class="docutils literal notranslate"><span class="pre">MensajeForm.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.forms.MensajeForm.Meta.exclude"><code class="docutils literal notranslate"><span class="pre">MensajeForm.Meta.exclude</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.MensajeForm.Meta.fields"><code class="docutils literal notranslate"><span class="pre">MensajeForm.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.MensajeForm.Meta.labels"><code class="docutils literal notranslate"><span class="pre">MensajeForm.Meta.labels</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.MensajeForm.Meta.model"><code class="docutils literal notranslate"><span class="pre">MensajeForm.Meta.model</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.forms.MensajeForm.base_fields"><code class="docutils literal notranslate"><span class="pre">MensajeForm.base_fields</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.MensajeForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">MensajeForm.declared_fields</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.MensajeForm.media"><code class="docutils literal notranslate"><span class="pre">MensajeForm.media</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.forms.NoteForm"><code class="docutils literal notranslate"><span class="pre">NoteForm</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.forms.NoteForm.Meta"><code class="docutils literal notranslate"><span class="pre">NoteForm.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.forms.NoteForm.Meta.exclude"><code class="docutils literal notranslate"><span class="pre">NoteForm.Meta.exclude</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.NoteForm.Meta.fields"><code class="docutils literal notranslate"><span class="pre">NoteForm.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.NoteForm.Meta.labels"><code class="docutils literal notranslate"><span class="pre">NoteForm.Meta.labels</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.NoteForm.Meta.model"><code class="docutils literal notranslate"><span class="pre">NoteForm.Meta.model</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.NoteForm.Meta.widgets"><code class="docutils literal notranslate"><span class="pre">NoteForm.Meta.widgets</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.forms.NoteForm.base_fields"><code class="docutils literal notranslate"><span class="pre">NoteForm.base_fields</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.NoteForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">NoteForm.declared_fields</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.NoteForm.media"><code class="docutils literal notranslate"><span class="pre">NoteForm.media</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.forms.ProjectAdmin"><code class="docutils literal notranslate"><span class="pre">ProjectAdmin</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.forms.ProjectAdmin.form"><code class="docutils literal notranslate"><span class="pre">ProjectAdmin.form</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.ProjectAdmin.media"><code class="docutils literal notranslate"><span class="pre">ProjectAdmin.media</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.forms.ProjectForm"><code class="docutils literal notranslate"><span class="pre">ProjectForm</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.forms.ProjectForm.Meta"><code class="docutils literal notranslate"><span class="pre">ProjectForm.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.forms.ProjectForm.Meta.exclude"><code class="docutils literal notranslate"><span class="pre">ProjectForm.Meta.exclude</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.ProjectForm.Meta.fields"><code class="docutils literal notranslate"><span class="pre">ProjectForm.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.ProjectForm.Meta.labels"><code class="docutils literal notranslate"><span class="pre">ProjectForm.Meta.labels</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.ProjectForm.Meta.model"><code class="docutils literal notranslate"><span class="pre">ProjectForm.Meta.model</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.forms.ProjectForm.base_fields"><code class="docutils literal notranslate"><span class="pre">ProjectForm.base_fields</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.ProjectForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">ProjectForm.declared_fields</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.ProjectForm.media"><code class="docutils literal notranslate"><span class="pre">ProjectForm.media</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.forms.ProjectSlideForm"><code class="docutils literal notranslate"><span class="pre">ProjectSlideForm</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.forms.ProjectSlideForm.Meta"><code class="docutils literal notranslate"><span class="pre">ProjectSlideForm.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.forms.ProjectSlideForm.Meta.exclude"><code class="docutils literal notranslate"><span class="pre">ProjectSlideForm.Meta.exclude</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.ProjectSlideForm.Meta.fields"><code class="docutils literal notranslate"><span class="pre">ProjectSlideForm.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.ProjectSlideForm.Meta.labels"><code class="docutils literal notranslate"><span class="pre">ProjectSlideForm.Meta.labels</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.ProjectSlideForm.Meta.model"><code class="docutils literal notranslate"><span class="pre">ProjectSlideForm.Meta.model</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.forms.ProjectSlideForm.base_fields"><code class="docutils literal notranslate"><span class="pre">ProjectSlideForm.base_fields</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.ProjectSlideForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">ProjectSlideForm.declared_fields</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.ProjectSlideForm.media"><code class="docutils literal notranslate"><span class="pre">ProjectSlideForm.media</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.forms.SearchForm"><code class="docutils literal notranslate"><span class="pre">SearchForm</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.forms.SearchForm.base_fields"><code class="docutils literal notranslate"><span class="pre">SearchForm.base_fields</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.SearchForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">SearchForm.declared_fields</span></code></a></li>
+<li><a class="reference internal" href="#Projects.forms.SearchForm.media"><code class="docutils literal notranslate"><span class="pre">SearchForm.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Projects.models">Projects.models module</a><ul>
+<li><a class="reference internal" href="#Projects.models.Message"><code class="docutils literal notranslate"><span class="pre">Message</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.models.Message.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Message.DoesNotExist</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Message.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Message.MultipleObjectsReturned</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Message.contenido"><code class="docutils literal notranslate"><span class="pre">Message.contenido</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Message.fecha_envio"><code class="docutils literal notranslate"><span class="pre">Message.fecha_envio</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Message.get_next_by_fecha_envio"><code class="docutils literal notranslate"><span class="pre">Message.get_next_by_fecha_envio()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Message.get_previous_by_fecha_envio"><code class="docutils literal notranslate"><span class="pre">Message.get_previous_by_fecha_envio()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Message.id"><code class="docutils literal notranslate"><span class="pre">Message.id</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Message.objects"><code class="docutils literal notranslate"><span class="pre">Message.objects</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Message.project"><code class="docutils literal notranslate"><span class="pre">Message.project</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Message.project_id"><code class="docutils literal notranslate"><span class="pre">Message.project_id</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Message.user"><code class="docutils literal notranslate"><span class="pre">Message.user</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Message.user_id"><code class="docutils literal notranslate"><span class="pre">Message.user_id</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.models.Notes"><code class="docutils literal notranslate"><span class="pre">Notes</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.models.Notes.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Notes.DoesNotExist</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Notes.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Notes.MultipleObjectsReturned</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Notes.description"><code class="docutils literal notranslate"><span class="pre">Notes.description</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Notes.geojson_data"><code class="docutils literal notranslate"><span class="pre">Notes.geojson_data</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Notes.get_absolute_url"><code class="docutils literal notranslate"><span class="pre">Notes.get_absolute_url()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Notes.id"><code class="docutils literal notranslate"><span class="pre">Notes.id</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Notes.name"><code class="docutils literal notranslate"><span class="pre">Notes.name</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Notes.objects"><code class="docutils literal notranslate"><span class="pre">Notes.objects</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Notes.project"><code class="docutils literal notranslate"><span class="pre">Notes.project</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Notes.project_id"><code class="docutils literal notranslate"><span class="pre">Notes.project_id</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Notes.show"><code class="docutils literal notranslate"><span class="pre">Notes.show</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Notes.xDosPos"><code class="docutils literal notranslate"><span class="pre">Notes.xDosPos</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Notes.xUnoPos"><code class="docutils literal notranslate"><span class="pre">Notes.xUnoPos</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Notes.yDosPos"><code class="docutils literal notranslate"><span class="pre">Notes.yDosPos</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Notes.yUnoPos"><code class="docutils literal notranslate"><span class="pre">Notes.yUnoPos</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.models.Project"><code class="docutils literal notranslate"><span class="pre">Project</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.models.Project.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Project.DoesNotExist</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Project.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Project.MultipleObjectsReturned</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Project.adminUsers"><code class="docutils literal notranslate"><span class="pre">Project.adminUsers</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Project.description"><code class="docutils literal notranslate"><span class="pre">Project.description</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Project.get_absolute_url"><code class="docutils literal notranslate"><span class="pre">Project.get_absolute_url()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Project.id"><code class="docutils literal notranslate"><span class="pre">Project.id</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Project.invitedUsers"><code class="docutils literal notranslate"><span class="pre">Project.invitedUsers</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Project.message_set"><code class="docutils literal notranslate"><span class="pre">Project.message_set</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Project.name"><code class="docutils literal notranslate"><span class="pre">Project.name</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Project.objects"><code class="docutils literal notranslate"><span class="pre">Project.objects</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Project.projectslide_set"><code class="docutils literal notranslate"><span class="pre">Project.projectslide_set</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Project.sharedUsers"><code class="docutils literal notranslate"><span class="pre">Project.sharedUsers</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Project.user"><code class="docutils literal notranslate"><span class="pre">Project.user</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.Project.user_id"><code class="docutils literal notranslate"><span class="pre">Project.user_id</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.models.ProjectSlide"><code class="docutils literal notranslate"><span class="pre">ProjectSlide</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.models.ProjectSlide.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">ProjectSlide.DoesNotExist</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.ProjectSlide.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">ProjectSlide.MultipleObjectsReturned</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.ProjectSlide.adminPermission"><code class="docutils literal notranslate"><span class="pre">ProjectSlide.adminPermission</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.ProjectSlide.description"><code class="docutils literal notranslate"><span class="pre">ProjectSlide.description</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.ProjectSlide.get_absolute_url"><code class="docutils literal notranslate"><span class="pre">ProjectSlide.get_absolute_url()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.ProjectSlide.id"><code class="docutils literal notranslate"><span class="pre">ProjectSlide.id</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.ProjectSlide.name"><code class="docutils literal notranslate"><span class="pre">ProjectSlide.name</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.ProjectSlide.notes_set"><code class="docutils literal notranslate"><span class="pre">ProjectSlide.notes_set</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.ProjectSlide.objects"><code class="docutils literal notranslate"><span class="pre">ProjectSlide.objects</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.ProjectSlide.project"><code class="docutils literal notranslate"><span class="pre">ProjectSlide.project</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.ProjectSlide.project_id"><code class="docutils literal notranslate"><span class="pre">ProjectSlide.project_id</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.ProjectSlide.slide"><code class="docutils literal notranslate"><span class="pre">ProjectSlide.slide</span></code></a></li>
+<li><a class="reference internal" href="#Projects.models.ProjectSlide.slide_id"><code class="docutils literal notranslate"><span class="pre">ProjectSlide.slide_id</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Projects.routing">Projects.routing module</a></li>
+<li><a class="reference internal" href="#module-Projects.tests">Projects.tests module</a></li>
+<li><a class="reference internal" href="#module-Projects.urls">Projects.urls module</a></li>
+<li><a class="reference internal" href="#module-Projects.views">Projects.views module</a><ul>
+<li><a class="reference internal" href="#Projects.views.datos_actualizados_catalogo"><code class="docutils literal notranslate"><span class="pre">datos_actualizados_catalogo()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.datos_actualizados_chat"><code class="docutils literal notranslate"><span class="pre">datos_actualizados_chat()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.datos_actualizados_colaboradores"><code class="docutils literal notranslate"><span class="pre">datos_actualizados_colaboradores()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.datos_actualizados_placas"><code class="docutils literal notranslate"><span class="pre">datos_actualizados_placas()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.delete"><code class="docutils literal notranslate"><span class="pre">delete()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.deleteProject"><code class="docutils literal notranslate"><span class="pre">deleteProject()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.deleteProjectInvitedUser"><code class="docutils literal notranslate"><span class="pre">deleteProjectInvitedUser()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.deleteProjectSlide"><code class="docutils literal notranslate"><span class="pre">deleteProjectSlide()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.deleteProjectUser"><code class="docutils literal notranslate"><span class="pre">deleteProjectUser()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.newProjectInvitedUser"><code class="docutils literal notranslate"><span class="pre">newProjectInvitedUser()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.newProjectUser"><code class="docutils literal notranslate"><span class="pre">newProjectUser()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.noteDetail"><code class="docutils literal notranslate"><span class="pre">noteDetail</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.views.noteDetail.get_context_data"><code class="docutils literal notranslate"><span class="pre">noteDetail.get_context_data()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.noteDetail.model"><code class="docutils literal notranslate"><span class="pre">noteDetail.model</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.noteDetail.post"><code class="docutils literal notranslate"><span class="pre">noteDetail.post()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.noteDetail.template_name"><code class="docutils literal notranslate"><span class="pre">noteDetail.template_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.views.obtener_lista"><code class="docutils literal notranslate"><span class="pre">obtener_lista()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectDetail"><code class="docutils literal notranslate"><span class="pre">projectDetail</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.views.projectDetail.form_class"><code class="docutils literal notranslate"><span class="pre">projectDetail.form_class</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectDetail.get"><code class="docutils literal notranslate"><span class="pre">projectDetail.get()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectDetail.get_context_data"><code class="docutils literal notranslate"><span class="pre">projectDetail.get_context_data()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectDetail.get_success_url"><code class="docutils literal notranslate"><span class="pre">projectDetail.get_success_url()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectDetail.model"><code class="docutils literal notranslate"><span class="pre">projectDetail.model</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectDetail.post"><code class="docutils literal notranslate"><span class="pre">projectDetail.post()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectDetail.template_name"><code class="docutils literal notranslate"><span class="pre">projectDetail.template_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.views.projectProfileDetail"><code class="docutils literal notranslate"><span class="pre">projectProfileDetail</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.views.projectProfileDetail.get"><code class="docutils literal notranslate"><span class="pre">projectProfileDetail.get()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectProfileDetail.get_context_data"><code class="docutils literal notranslate"><span class="pre">projectProfileDetail.get_context_data()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectProfileDetail.get_success_url"><code class="docutils literal notranslate"><span class="pre">projectProfileDetail.get_success_url()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectProfileDetail.model"><code class="docutils literal notranslate"><span class="pre">projectProfileDetail.model</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectProfileDetail.template_name"><code class="docutils literal notranslate"><span class="pre">projectProfileDetail.template_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.views.projectSlideDetail"><code class="docutils literal notranslate"><span class="pre">projectSlideDetail</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.views.projectSlideDetail.form_class"><code class="docutils literal notranslate"><span class="pre">projectSlideDetail.form_class</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectSlideDetail.get_context_data"><code class="docutils literal notranslate"><span class="pre">projectSlideDetail.get_context_data()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectSlideDetail.get_success_url"><code class="docutils literal notranslate"><span class="pre">projectSlideDetail.get_success_url()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectSlideDetail.model"><code class="docutils literal notranslate"><span class="pre">projectSlideDetail.model</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectSlideDetail.post"><code class="docutils literal notranslate"><span class="pre">projectSlideDetail.post()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projectSlideDetail.template_name"><code class="docutils literal notranslate"><span class="pre">projectSlideDetail.template_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.views.projects"><code class="docutils literal notranslate"><span class="pre">projects</span></code></a><ul>
+<li><a class="reference internal" href="#Projects.views.projects.form_class"><code class="docutils literal notranslate"><span class="pre">projects.form_class</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projects.get_context_data"><code class="docutils literal notranslate"><span class="pre">projects.get_context_data()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projects.get_queryset"><code class="docutils literal notranslate"><span class="pre">projects.get_queryset()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projects.get_success_url"><code class="docutils literal notranslate"><span class="pre">projects.get_success_url()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projects.model"><code class="docutils literal notranslate"><span class="pre">projects.model</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projects.paginate_by"><code class="docutils literal notranslate"><span class="pre">projects.paginate_by</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projects.post"><code class="docutils literal notranslate"><span class="pre">projects.post()</span></code></a></li>
+<li><a class="reference internal" href="#Projects.views.projects.template_name"><code class="docutils literal notranslate"><span class="pre">projects.template_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Projects.views.showNote"><code class="docutils literal notranslate"><span class="pre">showNote()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Projects">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <div role="main">
+        
+  <section id="projects-package">
+<h1>Projects package<a class="headerlink" href="#projects-package" title="Link to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Projects.migrations.html">Projects.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Projects.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Projects.migrations.html#module-Projects.migrations.0001_initial">Projects.migrations.0001_initial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Projects.migrations.html#Projects.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Projects.migrations.html#Projects.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Projects.migrations.html#Projects.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Projects.migrations.html#Projects.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Projects.migrations.html#module-Projects.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-Projects.admin">
+<span id="projects-admin-module"></span><h2>Projects.admin module<a class="headerlink" href="#module-Projects.admin" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-Projects.apps">
+<span id="projects-apps-module"></span><h2>Projects.apps module<a class="headerlink" href="#module-Projects.apps" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.apps.ProjectsConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.apps.</span></span><span class="sig-name descname"><span class="pre">ProjectsConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/apps.html#ProjectsConfig"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.apps.ProjectsConfig" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.apps.ProjectsConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Projects'</span></em><a class="headerlink" href="#Projects.apps.ProjectsConfig.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Projects.consumers">
+<span id="projects-consumers-module"></span><h2>Projects.consumers module<a class="headerlink" href="#module-Projects.consumers" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.consumers.ChatConsumer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.consumers.</span></span><span class="sig-name descname"><span class="pre">ChatConsumer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/consumers.html#ChatConsumer"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.consumers.ChatConsumer" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncWebsocketConsumer</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.consumers.ChatConsumer.chat_message">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">chat_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/consumers.html#ChatConsumer.chat_message"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.consumers.ChatConsumer.chat_message" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.consumers.ChatConsumer.connect">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/consumers.html#ChatConsumer.connect"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.consumers.ChatConsumer.connect" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.consumers.ChatConsumer.disconnect">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">close_code</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/consumers.html#ChatConsumer.disconnect"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.consumers.ChatConsumer.disconnect" title="Link to this definition">¶</a></dt>
+<dd><p>Called when a WebSocket connection is closed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.consumers.ChatConsumer.receive">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">receive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/consumers.html#ChatConsumer.receive"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.consumers.ChatConsumer.receive" title="Link to this definition">¶</a></dt>
+<dd><p>Called with a decoded WebSocket frame.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Projects.decorators">
+<span id="projects-decorators-module"></span><h2>Projects.decorators module<a class="headerlink" href="#module-Projects.decorators" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.decorators.project_collaborator_required">
+<span class="sig-prename descclassname"><span class="pre">Projects.decorators.</span></span><span class="sig-name descname"><span class="pre">project_collaborator_required</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view_func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/decorators.html#project_collaborator_required"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.decorators.project_collaborator_required" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.decorators.user_is_project_collaborator">
+<span class="sig-prename descclassname"><span class="pre">Projects.decorators.</span></span><span class="sig-name descname"><span class="pre">user_is_project_collaborator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/decorators.html#user_is_project_collaborator"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.decorators.user_is_project_collaborator" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-Projects.forms">
+<span id="projects-forms-module"></span><h2>Projects.forms module<a class="headerlink" href="#module-Projects.forms" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.forms.MensajeForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.forms.</span></span><span class="sig-name descname"><span class="pre">MensajeForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/forms.html#MensajeForm"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.forms.MensajeForm" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Form</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.forms.MensajeForm.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="../_modules/Projects/forms.html#MensajeForm.Meta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.forms.MensajeForm.Meta" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.MensajeForm.Meta.exclude">
+<span class="sig-name descname"><span class="pre">exclude</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['user',</span> <span class="pre">'project',</span> <span class="pre">'contenido']</span></em><a class="headerlink" href="#Projects.forms.MensajeForm.Meta.exclude" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.MensajeForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['user',</span> <span class="pre">'project',</span> <span class="pre">'contenido']</span></em><a class="headerlink" href="#Projects.forms.MensajeForm.Meta.fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.MensajeForm.Meta.labels">
+<span class="sig-name descname"><span class="pre">labels</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">'Detalles</span> <span class="pre">Adicionales',</span> <span class="pre">'name':</span> <span class="pre">'Texto'}</span></em><a class="headerlink" href="#Projects.forms.MensajeForm.Meta.labels" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.MensajeForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Projects.forms.MensajeForm.Meta.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Projects.models.Notes" title="Projects.models.Notes"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notes</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.MensajeForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'contenido':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#Projects.forms.MensajeForm.base_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.MensajeForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'contenido':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#Projects.forms.MensajeForm.declared_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="Projects.forms.MensajeForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#Projects.forms.MensajeForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.forms.NoteForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.forms.</span></span><span class="sig-name descname"><span class="pre">NoteForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/forms.html#NoteForm"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.forms.NoteForm" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.forms.NoteForm.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="../_modules/Projects/forms.html#NoteForm.Meta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.forms.NoteForm.Meta" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.NoteForm.Meta.exclude">
+<span class="sig-name descname"><span class="pre">exclude</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['project',</span> <span class="pre">'xUnoPos',</span> <span class="pre">'yUnoPos',</span> <span class="pre">'xDosPos',</span> <span class="pre">'yDosPos',</span> <span class="pre">'geojson_data']</span></em><a class="headerlink" href="#Projects.forms.NoteForm.Meta.exclude" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.NoteForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['project',</span> <span class="pre">'name',</span> <span class="pre">'description',</span> <span class="pre">'xUnoPos',</span> <span class="pre">'yUnoPos',</span> <span class="pre">'xDosPos',</span> <span class="pre">'yDosPos',</span> <span class="pre">'geojson_data']</span></em><a class="headerlink" href="#Projects.forms.NoteForm.Meta.fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.NoteForm.Meta.labels">
+<span class="sig-name descname"><span class="pre">labels</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">'Detalles</span> <span class="pre">Adicionales',</span> <span class="pre">'name':</span> <span class="pre">'Texto'}</span></em><a class="headerlink" href="#Projects.forms.NoteForm.Meta.labels" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.NoteForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Projects.forms.NoteForm.Meta.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Projects.models.Notes" title="Projects.models.Notes"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notes</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.NoteForm.Meta.widgets">
+<span class="sig-name descname"><span class="pre">widgets</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">&lt;django.forms.widgets.Textarea</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#Projects.forms.NoteForm.Meta.widgets" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.NoteForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#Projects.forms.NoteForm.base_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.NoteForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#Projects.forms.NoteForm.declared_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="Projects.forms.NoteForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#Projects.forms.NoteForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.forms.ProjectAdmin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.forms.</span></span><span class="sig-name descname"><span class="pre">ProjectAdmin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">admin_site</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/forms.html#ProjectAdmin"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.forms.ProjectAdmin" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelAdmin</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.ProjectAdmin.form">
+<span class="sig-name descname"><span class="pre">form</span></span><a class="headerlink" href="#Projects.forms.ProjectAdmin.form" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Projects.forms.ProjectForm" title="Projects.forms.ProjectForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="Projects.forms.ProjectAdmin.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#Projects.forms.ProjectAdmin.media" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.forms.ProjectForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.forms.</span></span><span class="sig-name descname"><span class="pre">ProjectForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/forms.html#ProjectForm"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.forms.ProjectForm" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.forms.ProjectForm.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="../_modules/Projects/forms.html#ProjectForm.Meta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.forms.ProjectForm.Meta" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.ProjectForm.Meta.exclude">
+<span class="sig-name descname"><span class="pre">exclude</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['user']</span></em><a class="headerlink" href="#Projects.forms.ProjectForm.Meta.exclude" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.ProjectForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['name',</span> <span class="pre">'user',</span> <span class="pre">'description']</span></em><a class="headerlink" href="#Projects.forms.ProjectForm.Meta.fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.ProjectForm.Meta.labels">
+<span class="sig-name descname"><span class="pre">labels</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">'Descripción',</span> <span class="pre">'name':</span> <span class="pre">'Titulo'}</span></em><a class="headerlink" href="#Projects.forms.ProjectForm.Meta.labels" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.ProjectForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Projects.forms.ProjectForm.Meta.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Projects.models.Project" title="Projects.models.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.ProjectForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#Projects.forms.ProjectForm.base_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.ProjectForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#Projects.forms.ProjectForm.declared_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="Projects.forms.ProjectForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#Projects.forms.ProjectForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.forms.ProjectSlideForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.forms.</span></span><span class="sig-name descname"><span class="pre">ProjectSlideForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/forms.html#ProjectSlideForm"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.forms.ProjectSlideForm" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Form</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.forms.ProjectSlideForm.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="../_modules/Projects/forms.html#ProjectSlideForm.Meta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.forms.ProjectSlideForm.Meta" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.ProjectSlideForm.Meta.exclude">
+<span class="sig-name descname"><span class="pre">exclude</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['project',</span> <span class="pre">'slide']</span></em><a class="headerlink" href="#Projects.forms.ProjectSlideForm.Meta.exclude" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.ProjectSlideForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['name',</span> <span class="pre">'project',</span> <span class="pre">'description',</span> <span class="pre">'slide']</span></em><a class="headerlink" href="#Projects.forms.ProjectSlideForm.Meta.fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.ProjectSlideForm.Meta.labels">
+<span class="sig-name descname"><span class="pre">labels</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">'Descripción',</span> <span class="pre">'name':</span> <span class="pre">'Titulo'}</span></em><a class="headerlink" href="#Projects.forms.ProjectSlideForm.Meta.labels" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.ProjectSlideForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Projects.forms.ProjectSlideForm.Meta.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Projects.models.ProjectSlide" title="Projects.models.ProjectSlide"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectSlide</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.ProjectSlideForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#Projects.forms.ProjectSlideForm.base_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.ProjectSlideForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#Projects.forms.ProjectSlideForm.declared_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="Projects.forms.ProjectSlideForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#Projects.forms.ProjectSlideForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.forms.SearchForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.forms.</span></span><span class="sig-name descname"><span class="pre">SearchForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/forms.html#SearchForm"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.forms.SearchForm" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Form</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.SearchForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'titulo':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#Projects.forms.SearchForm.base_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.forms.SearchForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'titulo':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#Projects.forms.SearchForm.declared_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="Projects.forms.SearchForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#Projects.forms.SearchForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Projects.models">
+<span id="projects-models-module"></span><h2>Projects.models module<a class="headerlink" href="#module-Projects.models" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.models.Message">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.models.</span></span><span class="sig-name descname"><span class="pre">Message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contenido</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fecha_envio</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/models.html#Message"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.models.Message" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Projects.models.Message.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Projects.models.Message.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Projects.models.Message.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Projects.models.Message.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Message.contenido">
+<span class="sig-name descname"><span class="pre">contenido</span></span><a class="headerlink" href="#Projects.models.Message.contenido" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Message.fecha_envio">
+<span class="sig-name descname"><span class="pre">fecha_envio</span></span><a class="headerlink" href="#Projects.models.Message.fecha_envio" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.models.Message.get_next_by_fecha_envio">
+<span class="sig-name descname"><span class="pre">get_next_by_fecha_envio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">fecha_envio&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Projects.models.Message.get_next_by_fecha_envio" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.models.Message.get_previous_by_fecha_envio">
+<span class="sig-name descname"><span class="pre">get_previous_by_fecha_envio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">fecha_envio&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Projects.models.Message.get_previous_by_fecha_envio" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Message.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Projects.models.Message.id" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Message.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Projects.models.Message.objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Message.project">
+<span class="sig-name descname"><span class="pre">project</span></span><a class="headerlink" href="#Projects.models.Message.project" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Message.project_id">
+<span class="sig-name descname"><span class="pre">project_id</span></span><a class="headerlink" href="#Projects.models.Message.project_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Message.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#Projects.models.Message.user" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Message.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#Projects.models.Message.user_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.models.Notes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.models.</span></span><span class="sig-name descname"><span class="pre">Notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geojson_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xUnoPos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yUnoPos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xDosPos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yDosPos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/models.html#Notes"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.models.Notes" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Projects.models.Notes.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Projects.models.Notes.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Projects.models.Notes.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Projects.models.Notes.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Notes.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#Projects.models.Notes.description" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Notes.geojson_data">
+<span class="sig-name descname"><span class="pre">geojson_data</span></span><a class="headerlink" href="#Projects.models.Notes.geojson_data" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.models.Notes.get_absolute_url">
+<span class="sig-name descname"><span class="pre">get_absolute_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/models.html#Notes.get_absolute_url"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.models.Notes.get_absolute_url" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Notes.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Projects.models.Notes.id" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Notes.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#Projects.models.Notes.name" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Notes.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Projects.models.Notes.objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Notes.project">
+<span class="sig-name descname"><span class="pre">project</span></span><a class="headerlink" href="#Projects.models.Notes.project" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Notes.project_id">
+<span class="sig-name descname"><span class="pre">project_id</span></span><a class="headerlink" href="#Projects.models.Notes.project_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Notes.show">
+<span class="sig-name descname"><span class="pre">show</span></span><a class="headerlink" href="#Projects.models.Notes.show" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Notes.xDosPos">
+<span class="sig-name descname"><span class="pre">xDosPos</span></span><a class="headerlink" href="#Projects.models.Notes.xDosPos" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Notes.xUnoPos">
+<span class="sig-name descname"><span class="pre">xUnoPos</span></span><a class="headerlink" href="#Projects.models.Notes.xUnoPos" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Notes.yDosPos">
+<span class="sig-name descname"><span class="pre">yDosPos</span></span><a class="headerlink" href="#Projects.models.Notes.yDosPos" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Notes.yUnoPos">
+<span class="sig-name descname"><span class="pre">yUnoPos</span></span><a class="headerlink" href="#Projects.models.Notes.yUnoPos" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.models.Project">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.models.</span></span><span class="sig-name descname"><span class="pre">Project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/models.html#Project"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.models.Project" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Projects.models.Project.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Projects.models.Project.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Projects.models.Project.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Projects.models.Project.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Project.adminUsers">
+<span class="sig-name descname"><span class="pre">adminUsers</span></span><a class="headerlink" href="#Projects.models.Project.adminUsers" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Project.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#Projects.models.Project.description" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.models.Project.get_absolute_url">
+<span class="sig-name descname"><span class="pre">get_absolute_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/models.html#Project.get_absolute_url"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.models.Project.get_absolute_url" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Project.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Projects.models.Project.id" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Project.invitedUsers">
+<span class="sig-name descname"><span class="pre">invitedUsers</span></span><a class="headerlink" href="#Projects.models.Project.invitedUsers" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Project.message_set">
+<span class="sig-name descname"><span class="pre">message_set</span></span><a class="headerlink" href="#Projects.models.Project.message_set" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Project.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#Projects.models.Project.name" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Project.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Projects.models.Project.objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Project.projectslide_set">
+<span class="sig-name descname"><span class="pre">projectslide_set</span></span><a class="headerlink" href="#Projects.models.Project.projectslide_set" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Project.sharedUsers">
+<span class="sig-name descname"><span class="pre">sharedUsers</span></span><a class="headerlink" href="#Projects.models.Project.sharedUsers" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Project.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#Projects.models.Project.user" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.Project.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#Projects.models.Project.user_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.models.ProjectSlide">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.models.</span></span><span class="sig-name descname"><span class="pre">ProjectSlide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adminPermission</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slide</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/models.html#ProjectSlide"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.models.ProjectSlide" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Projects.models.ProjectSlide.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Projects.models.ProjectSlide.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Projects.models.ProjectSlide.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Projects.models.ProjectSlide.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.ProjectSlide.adminPermission">
+<span class="sig-name descname"><span class="pre">adminPermission</span></span><a class="headerlink" href="#Projects.models.ProjectSlide.adminPermission" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.ProjectSlide.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#Projects.models.ProjectSlide.description" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.models.ProjectSlide.get_absolute_url">
+<span class="sig-name descname"><span class="pre">get_absolute_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/models.html#ProjectSlide.get_absolute_url"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.models.ProjectSlide.get_absolute_url" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.ProjectSlide.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Projects.models.ProjectSlide.id" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.ProjectSlide.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#Projects.models.ProjectSlide.name" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.ProjectSlide.notes_set">
+<span class="sig-name descname"><span class="pre">notes_set</span></span><a class="headerlink" href="#Projects.models.ProjectSlide.notes_set" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.ProjectSlide.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Projects.models.ProjectSlide.objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.ProjectSlide.project">
+<span class="sig-name descname"><span class="pre">project</span></span><a class="headerlink" href="#Projects.models.ProjectSlide.project" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.ProjectSlide.project_id">
+<span class="sig-name descname"><span class="pre">project_id</span></span><a class="headerlink" href="#Projects.models.ProjectSlide.project_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.ProjectSlide.slide">
+<span class="sig-name descname"><span class="pre">slide</span></span><a class="headerlink" href="#Projects.models.ProjectSlide.slide" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.models.ProjectSlide.slide_id">
+<span class="sig-name descname"><span class="pre">slide_id</span></span><a class="headerlink" href="#Projects.models.ProjectSlide.slide_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Projects.routing">
+<span id="projects-routing-module"></span><h2>Projects.routing module<a class="headerlink" href="#module-Projects.routing" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-Projects.tests">
+<span id="projects-tests-module"></span><h2>Projects.tests module<a class="headerlink" href="#module-Projects.tests" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-Projects.urls">
+<span id="projects-urls-module"></span><h2>Projects.urls module<a class="headerlink" href="#module-Projects.urls" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-Projects.views">
+<span id="projects-views-module"></span><h2>Projects.views module<a class="headerlink" href="#module-Projects.views" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.views.datos_actualizados_catalogo">
+<span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">datos_actualizados_catalogo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#datos_actualizados_catalogo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.datos_actualizados_catalogo" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.views.datos_actualizados_chat">
+<span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">datos_actualizados_chat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#datos_actualizados_chat"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.datos_actualizados_chat" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.views.datos_actualizados_colaboradores">
+<span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">datos_actualizados_colaboradores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#datos_actualizados_colaboradores"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.datos_actualizados_colaboradores" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.views.datos_actualizados_placas">
+<span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">datos_actualizados_placas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#datos_actualizados_placas"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.datos_actualizados_placas" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.views.delete">
+<span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nota_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#delete"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.delete" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.views.deleteProject">
+<span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">deleteProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#deleteProject"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.deleteProject" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.views.deleteProjectInvitedUser">
+<span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">deleteProjectInvitedUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projectUser_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#deleteProjectInvitedUser"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.deleteProjectInvitedUser" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.views.deleteProjectSlide">
+<span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">deleteProjectSlide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#deleteProjectSlide"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.deleteProjectSlide" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.views.deleteProjectUser">
+<span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">deleteProjectUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projectUser_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#deleteProjectUser"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.deleteProjectUser" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.views.newProjectInvitedUser">
+<span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">newProjectInvitedUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projectUser_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#newProjectInvitedUser"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.newProjectInvitedUser" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.views.newProjectUser">
+<span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">newProjectUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projectUser_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#newProjectUser"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.newProjectUser" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.views.noteDetail">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">noteDetail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#noteDetail"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.noteDetail" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.noteDetail.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#noteDetail.get_context_data"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.noteDetail.get_context_data" title="Link to this definition">¶</a></dt>
+<dd><p>Insert the single object into the context dict.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.views.noteDetail.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Projects.views.noteDetail.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Projects.models.Notes" title="Projects.models.Notes"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notes</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.noteDetail.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#noteDetail.post"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.noteDetail.post" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.views.noteDetail.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Projects/note.html'</span></em><a class="headerlink" href="#Projects.views.noteDetail.template_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.views.obtener_lista">
+<span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">obtener_lista</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#obtener_lista"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.obtener_lista" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.views.projectDetail">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">projectDetail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projectDetail"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projectDetail" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">FormView</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.views.projectDetail.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#Projects.views.projectDetail.form_class" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Projects.forms.ProjectSlideForm" title="Projects.forms.ProjectSlideForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectSlideForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.projectDetail.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projectDetail.get"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projectDetail.get" title="Link to this definition">¶</a></dt>
+<dd><p>Handle GET requests: instantiate a blank version of the form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.projectDetail.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projectDetail.get_context_data"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projectDetail.get_context_data" title="Link to this definition">¶</a></dt>
+<dd><p>Insert the single object into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.projectDetail.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projectDetail.get_success_url"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projectDetail.get_success_url" title="Link to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.views.projectDetail.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Projects.views.projectDetail.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Projects.models.Project" title="Projects.models.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.projectDetail.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projectDetail.post"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projectDetail.post" title="Link to this definition">¶</a></dt>
+<dd><p>Handle POST requests: instantiate a form instance with the passed
+POST variables and then check if it’s valid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.views.projectDetail.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Projects/project.html'</span></em><a class="headerlink" href="#Projects.views.projectDetail.template_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.views.projectProfileDetail">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">projectProfileDetail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projectProfileDetail"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projectProfileDetail" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">FormView</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.projectProfileDetail.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projectProfileDetail.get"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projectProfileDetail.get" title="Link to this definition">¶</a></dt>
+<dd><p>Handle GET requests: instantiate a blank version of the form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.projectProfileDetail.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projectProfileDetail.get_context_data"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projectProfileDetail.get_context_data" title="Link to this definition">¶</a></dt>
+<dd><p>Insert the single object into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.projectProfileDetail.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projectProfileDetail.get_success_url"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projectProfileDetail.get_success_url" title="Link to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.views.projectProfileDetail.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Projects.views.projectProfileDetail.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Projects.models.Project" title="Projects.models.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.views.projectProfileDetail.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Projects/projectProfile.html'</span></em><a class="headerlink" href="#Projects.views.projectProfileDetail.template_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.views.projectSlideDetail">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">projectSlideDetail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projectSlideDetail"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projectSlideDetail" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">FormView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.views.projectSlideDetail.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#Projects.views.projectSlideDetail.form_class" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Projects.forms.ProjectSlideForm" title="Projects.forms.ProjectSlideForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectSlideForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.projectSlideDetail.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projectSlideDetail.get_context_data"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projectSlideDetail.get_context_data" title="Link to this definition">¶</a></dt>
+<dd><p>Insert the single object into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.projectSlideDetail.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projectSlideDetail.get_success_url"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projectSlideDetail.get_success_url" title="Link to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.views.projectSlideDetail.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Projects.views.projectSlideDetail.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Projects.models.ProjectSlide" title="Projects.models.ProjectSlide"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectSlide</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.projectSlideDetail.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projectSlideDetail.post"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projectSlideDetail.post" title="Link to this definition">¶</a></dt>
+<dd><p>Handle POST requests: instantiate a form instance with the passed
+POST variables and then check if it’s valid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.views.projectSlideDetail.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Projects/projectSlide.html'</span></em><a class="headerlink" href="#Projects.views.projectSlideDetail.template_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Projects.views.projects">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">projects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projects"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projects" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ListView</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">FormView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.views.projects.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#Projects.views.projects.form_class" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Projects.forms.ProjectForm" title="Projects.forms.ProjectForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.projects.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projects.get_context_data"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projects.get_context_data" title="Link to this definition">¶</a></dt>
+<dd><p>Get the context for this view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.projects.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projects.get_queryset"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projects.get_queryset" title="Link to this definition">¶</a></dt>
+<dd><p>Return the list of items for this view.</p>
+<p>The return value must be an iterable and may be an instance of
+<cite>QuerySet</cite> in which case <cite>QuerySet</cite> specific behavior will be enabled.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.projects.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projects.get_success_url"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projects.get_success_url" title="Link to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.views.projects.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Projects.views.projects.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Projects.models.Project" title="Projects.models.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.views.projects.paginate_by">
+<span class="sig-name descname"><span class="pre">paginate_by</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></em><a class="headerlink" href="#Projects.views.projects.paginate_by" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Projects.views.projects.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#projects.post"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.projects.post" title="Link to this definition">¶</a></dt>
+<dd><p>Handle POST requests: instantiate a form instance with the passed
+POST variables and then check if it’s valid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Projects.views.projects.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Projects/projectList.html'</span></em><a class="headerlink" href="#Projects.views.projects.template_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Projects.views.showNote">
+<span class="sig-prename descclassname"><span class="pre">Projects.views.</span></span><span class="sig-name descname"><span class="pre">showNote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Projects/views.html#showNote"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Projects.views.showNote" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-Projects">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Projects" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, PRIS-Lab.
+      Creado usando <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

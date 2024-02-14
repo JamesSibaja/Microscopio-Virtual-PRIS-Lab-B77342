@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Microscopio.views &#8212; documentación de Microscopio Virtual - 1.0.0</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/scrolls.css?v=b5349046" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script src="../../_static/documentation_options.js?v=36c4ab74"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../../_static/theme_extras.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+  </head><body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="../../index.html"
+          title="back to the documentation overview"><span>Microscopio.views</span></a></h1>
+      </div>
+      <div class="relnav" role="navigation" aria-label="related navigation">
+        <a href="#">Microscopio.views</a>
+      </div>
+      <div id="contentwrapper">
+        <div role="main">
+        
+  <h1>Código fuente para Microscopio.views</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">Microscopio.models</span> <span class="kn">import</span> <span class="n">Slide</span><span class="p">,</span><span class="n">OpenSlide</span>
+<span class="kn">from</span> <span class="nn">django.views.generic</span> <span class="kn">import</span> <span class="n">CreateView</span>
+<span class="kn">from</span> <span class="nn">django.views</span> <span class="kn">import</span> <span class="n">generic</span>
+<span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">Template</span><span class="p">,</span> <span class="n">context</span>
+<span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">Q</span><span class="p">,</span> <span class="n">Count</span>
+<span class="kn">from</span> <span class="nn">django.core.paginator</span> <span class="kn">import</span> <span class="n">Paginator</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">django.views.generic.edit</span> <span class="kn">import</span> <span class="n">FormView</span>
+<span class="kn">from</span> <span class="nn">.forms</span> <span class="kn">import</span>  <span class="n">UploadFileForm</span><span class="p">,</span> <span class="n">SlideForm</span>
+<span class="kn">from</span> <span class="nn">.tasks</span> <span class="kn">import</span> <span class="n">convert_to_tiles</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">JsonResponse</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="c1"># Configura la configuración de registro según tus necesidades</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;myapp.view&#39;</span><span class="p">)</span> 
+<span class="c1"># Create your views here.</span>
+
+<div class="viewcode-block" id="micro">
+<a class="viewcode-back" href="../../modules/Microscopio.html#Microscopio.views.micro">[documentos]</a>
+<span class="k">class</span> <span class="nc">micro</span><span class="p">(</span><span class="n">generic</span><span class="o">.</span><span class="n">DetailView</span><span class="p">):</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;Microscopio/microscopio.html&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Slide</span></div>
+
+
+<div class="viewcode-block" id="microfull">
+<a class="viewcode-back" href="../../modules/Microscopio.html#Microscopio.views.microfull">[documentos]</a>
+<span class="k">class</span> <span class="nc">microfull</span><span class="p">(</span><span class="n">generic</span><span class="o">.</span><span class="n">DetailView</span><span class="p">):</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;Microscopio/microscopiofull.html&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Slide</span></div>
+
+
+<div class="viewcode-block" id="catalogo">
+<a class="viewcode-back" href="../../modules/Microscopio.html#Microscopio.views.catalogo">[documentos]</a>
+<span class="k">def</span> <span class="nf">catalogo</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;buscar&#39;</span><span class="p">)</span>
+    <span class="n">ver</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ver&#39;</span><span class="p">)</span>
+    <span class="n">catalogo</span> <span class="o">=</span> <span class="n">Slide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span> <span class="n">assembled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">queryset</span><span class="p">:</span>
+        <span class="n">palabras</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">condiciones_busqueda</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">palabras</span><span class="p">:</span>
+            <span class="n">condicion</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">palabra</span><span class="p">)</span>
+            <span class="n">condicion2</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">description__icontains</span><span class="o">=</span><span class="n">palabra</span><span class="p">)</span> 
+            <span class="n">condiciones_busqueda</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condicion</span><span class="p">)</span>
+            <span class="n">condiciones_busqueda</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condicion2</span><span class="p">)</span>
+
+        <span class="n">consulta</span> <span class="o">=</span> <span class="n">Q</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">condicion</span> <span class="ow">in</span> <span class="n">condiciones_busqueda</span><span class="p">:</span>
+            <span class="n">consulta</span> <span class="o">|=</span> <span class="n">condicion</span>
+
+        <span class="n">catalogo</span> <span class="o">=</span> <span class="n">Slide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">consulta</span><span class="p">)</span>
+        
+    <span class="n">paginator</span> <span class="o">=</span> <span class="n">Paginator</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ver</span><span class="p">:</span>
+        <span class="n">paginator</span> <span class="o">=</span> <span class="n">Paginator</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+    
+    <span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">)</span>
+    <span class="n">catalogo</span> <span class="o">=</span> <span class="n">paginator</span><span class="o">.</span><span class="n">get_page</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s2">&quot;Microscopio/catalogo.html&quot;</span><span class="p">,{</span><span class="s1">&#39;catalogo&#39;</span><span class="p">:</span><span class="n">catalogo</span><span class="p">,</span><span class="s1">&#39;ver&#39;</span><span class="p">:</span><span class="n">ver</span><span class="p">})</span></div>
+
+
+<span class="c1"># class FileUploadView(FormView):</span>
+<span class="c1">#     template_name = &#39;Microscopio/subir_archivo.html&#39;</span>
+<span class="c1">#     form_class = FileUploadForm</span>
+<span class="c1">#     success_url = &#39;/subir-archivo/&#39;  # Cambia esto a la URL a la que deseas redirigir después de subir el archivo</span>
+
+<span class="c1">#     def form_valid(self, form):</span>
+<span class="c1">#         # Aquí puedes agregar la lógica para manejar el archivo subido, por ejemplo, guardarlo en el servidor</span>
+<span class="c1">#         return super().form_valid(form)</span>
+    
+<span class="c1"># from django.shortcuts import render</span>
+<span class="c1"># from .models import Archivo</span>
+
+
+<span class="c1"># def subir_archivo(request):</span>
+
+<span class="c1">#     if request.method == &#39;POST&#39;:</span>
+<span class="c1">#         form = SlideForm(request.POST, request.FILES) </span>
+<span class="c1">#         if form.is_valid():</span>
+<span class="c1">#             instancia = form.save(commit=False)</span>
+<span class="c1">#             instancia.image = &#39;archivo/&#39; + instancia.name</span>
+<span class="c1">#             instancia.path = &#39;media/slide/slide&#39; +str(instancia.id)</span>
+<span class="c1">#             instancia.save()</span>
+<span class="c1">#             archivo = request.FILES[&#39;file&#39;]</span>
+
+
+<span class="c1">#             with open(&#39;media/archivo/&#39; + instancia.name + str(instancia.id), &#39;wb&#39;) as destino:</span>
+<span class="c1">#                 for chunk in archivo.chunks():</span>
+<span class="c1">#                     destino.write(chunk)</span>
+        
+        
+<span class="c1">#             convert_to_tiles.delay(&#39;media/archivo/&#39; +instancia.name + str(instancia.id),&#39;media/slide/slide&#39; +str(instancia.id))</span>
+<span class="c1">#             return render(request, &#39;Microscopio/subir_archivo.html&#39;, {&#39;archivo_subido&#39;: True,&#39;form&#39;:form})</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         form = SlideForm() </span>
+
+<span class="c1">#     return render(request, &#39;Microscopio/subir_archivo.html&#39;, {&#39;archivo_subido&#39;: False,&#39;form&#39;:form})</span>
+
+<div class="viewcode-block" id="upload_file">
+<a class="viewcode-back" href="../../modules/Microscopio.html#Microscopio.views.upload_file">[documentos]</a>
+<span class="k">def</span> <span class="nf">upload_file</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">listSlide</span> <span class="o">=</span> <span class="n">OpenSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span> <span class="n">assembled</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">option</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">))</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">option</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># form = UploadFileForm(request.POST, request.FILES)</span>
+            <span class="c1"># if form.is_valid():</span>
+            <span class="n">uploaded_file</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span>
+            <span class="c1"># name = form.cleaned_data[&#39;name&#39;]</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">uploaded_file</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">OpenSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+            <span class="c1"># description = form.cleaned_data[&#39;description&#39;]</span>
+             <span class="c1"># name = form.cleaned_data[&#39;name&#39;]</span>
+            
+            
+            <span class="c1"># if Slide.objects.filter(name=name).exists():</span>
+            <span class="c1">#     return JsonResponse({&#39;error&#39;: &#39;Ya existe una instancia con este nombre&#39;})</span>
+            
+            <span class="c1"># Crear una instancia del modelo</span>
+            <span class="n">instance</span> <span class="o">=</span> <span class="n">OpenSlide</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">instance</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="c1"># instance.image = &#39;slides/slide&#39; +str(instance.id)+&#39;/1/0/0.jpg&#39;</span>
+            <span class="n">instance</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;media/archivo/&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">uploaded_file</span><span class="o">.</span><span class="n">name</span>
+            <span class="c1"># instance.zoomI = 0</span>
+            <span class="c1"># instance.zoomM = 9</span>
+            <span class="n">instance</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;VirtualMicroscope/media/archivo/&#39;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;VirtualMicroscope/media/archivo/&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">uploaded_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">destino</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">uploaded_file</span><span class="o">.</span><span class="n">chunks</span><span class="p">():</span>
+                    <span class="n">destino</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+        
+        
+            <span class="c1"># num = convert_to_tiles.delay(&#39;media/archivo/&#39; + str(instance.id),&#39;media/slides/slide&#39; +str(instance.id))</span>
+            
+            <span class="n">response_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Archivo cargado y procesado exitosamente&#39;</span><span class="p">}</span>
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">response_data</span><span class="p">)</span>
+            <span class="c1"># else:</span>
+        <span class="c1">#     return JsonResponse(form.errors, status=400)  # Devuelve errores de validación</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Hola1&#39;</span><span class="p">)</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="n">SlideForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+                <span class="n">option</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">))</span>
+                <span class="n">rawSlide</span> <span class="o">=</span> <span class="n">OpenSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;slide&#39;</span><span class="p">)))</span>
+                <span class="n">instance</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">instance</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                <span class="n">instance</span><span class="o">.</span><span class="n">rawSlide</span> <span class="o">=</span> <span class="n">rawSlide</span>
+                <span class="n">instance</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="s1">&#39;slides/slide&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;/1/0/0.jpg&#39;</span>
+                <span class="n">instance</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;slide&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+                <span class="n">instance</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Hola&#39;</span><span class="p">)</span>
+                <span class="c1"># description = form.cleaned_data[&#39;description&#39;]</span>
+                <span class="c1"># name = form.cleaned_data[&#39;name&#39;]</span>
+
+                <span class="n">convert_to_tiles</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="n">rawSlide</span><span class="o">.</span><span class="n">path</span><span class="p">,</span><span class="s1">&#39;media/slides/slide&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">id</span><span class="p">),</span><span class="n">instance</span><span class="o">.</span><span class="n">rawSlide</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="n">instance</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">errors</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>  <span class="c1"># Devuelve errores de validación</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">SlideForm</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;Microscopio/subir_archivo.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span><span class="n">form</span><span class="p">,</span><span class="s1">&#39;listSlide&#39;</span><span class="p">:</span><span class="n">listSlide</span><span class="p">})</span></div>
+
+</pre></div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, PRIS-Lab.
+      Creado usando <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

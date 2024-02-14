@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Microscopio.forms &#8212; documentación de Microscopio Virtual - 1.0.0</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/scrolls.css?v=b5349046" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script src="../../_static/documentation_options.js?v=36c4ab74"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../../_static/theme_extras.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+  </head><body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="../../index.html"
+          title="back to the documentation overview"><span>Microscopio.forms</span></a></h1>
+      </div>
+      <div class="relnav" role="navigation" aria-label="related navigation">
+        <a href="#">Microscopio.forms</a>
+      </div>
+      <div id="contentwrapper">
+        <div role="main">
+        
+  <h1>Código fuente para Microscopio.forms</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">ModelForm</span><span class="p">,</span> <span class="n">Textarea</span><span class="p">,</span> <span class="n">Form</span><span class="p">,</span><span class="n">FileField</span>
+<span class="kn">from</span> <span class="nn">crispy_forms.helper</span> <span class="kn">import</span> <span class="n">FormHelper</span>
+<span class="kn">from</span> <span class="nn">crispy_forms.layout</span> <span class="kn">import</span> <span class="n">Submit</span>
+<span class="kn">from</span> <span class="nn">Projects.models</span> <span class="kn">import</span> <span class="n">Slide</span>
+<span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+
+<span class="c1"># class FileUploadForm(forms.Form):</span>
+<span class="c1">#     file = forms.FileField(label=&#39;Selecciona un archivo&#39;)</span>
+<span class="c1">#     name = forms.CharField(label=&#39;Nombre de slide&#39;)</span>
+<span class="c1">#     decription = forms.CharField(label=&#39;Descripcion del slide&#39;)</span>
+
+<span class="c1">#     def __init__(self, *args, **kwargs):</span>
+<span class="c1">#         super().__init__(*args, **kwargs)</span>
+<span class="c1">#         self.helper = FormHelper()</span>
+<span class="c1">#         self.helper.form_id = &#39;file-upload-form&#39;</span>
+<span class="c1">#         self.helper.form_method = &#39;post&#39;</span>
+<span class="c1">#         self.helper.form_class = &#39;form-horizontal&#39;</span>
+<span class="c1">#         self.helper.add_input(Submit(&#39;submit&#39;, &#39;Subir&#39;))</span>
+<div class="viewcode-block" id="UploadFileForm">
+<a class="viewcode-back" href="../../modules/Microscopio.html#Microscopio.forms.UploadFileForm">[documentos]</a>
+<span class="k">class</span> <span class="nc">UploadFileForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Nombre&#39;</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">Textarea</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Descripción&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SlideForm">
+<a class="viewcode-back" href="../../modules/Microscopio.html#Microscopio.forms.SlideForm">[documentos]</a>
+<span class="k">class</span> <span class="nc">SlideForm</span><span class="p">(</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="c1"># file = FileField(label=&#39;Selecciona un archivo&#39;)</span>
+<div class="viewcode-block" id="SlideForm.Meta">
+<a class="viewcode-back" href="../../modules/Microscopio.html#Microscopio.forms.SlideForm.Meta">[documentos]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Slide</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;Titulo&#39;</span><span class="p">,</span><span class="s1">&#39;description&#39;</span><span class="p">:</span><span class="s1">&#39;Descripción&#39;</span><span class="p">}</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SlideForm</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;form-control&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;placeholder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Titulo del slide&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;form-control&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;placeholder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Descripción del slide&#39;</span></div>
+
+</pre></div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, PRIS-Lab.
+      Creado usando <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

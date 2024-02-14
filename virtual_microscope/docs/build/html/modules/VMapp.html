@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>VMapp package &#8212; documentación de Microscopio Virtual - 1.0.0</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/scrolls.css?v=b5349046" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script src="../_static/documentation_options.js?v=36c4ab74"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../_static/theme_extras.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+  </head><body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="../index.html"
+          title="back to the documentation overview"><span>VMapp package</span></a></h1>
+      </div>
+      <div class="relnav" role="navigation" aria-label="related navigation">
+        <a href="#">VMapp package</a>
+      </div>
+      <div id="contentwrapper">
+        <div id="toc" role="navigation" aria-label="table of contents navigation">
+          <h3>Tabla de contenido</h3>
+          <ul>
+<li><a class="reference internal" href="#">VMapp package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-VMapp.admin">VMapp.admin module</a></li>
+<li><a class="reference internal" href="#module-VMapp.apps">VMapp.apps module</a><ul>
+<li><a class="reference internal" href="#VMapp.apps.VmappConfig"><code class="docutils literal notranslate"><span class="pre">VmappConfig</span></code></a><ul>
+<li><a class="reference internal" href="#VMapp.apps.VmappConfig.name"><code class="docutils literal notranslate"><span class="pre">VmappConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-VMapp.forms">VMapp.forms module</a><ul>
+<li><a class="reference internal" href="#VMapp.forms.CreateUserForm"><code class="docutils literal notranslate"><span class="pre">CreateUserForm</span></code></a><ul>
+<li><a class="reference internal" href="#VMapp.forms.CreateUserForm.Meta"><code class="docutils literal notranslate"><span class="pre">CreateUserForm.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#VMapp.forms.CreateUserForm.Meta.fields"><code class="docutils literal notranslate"><span class="pre">CreateUserForm.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.forms.CreateUserForm.Meta.model"><code class="docutils literal notranslate"><span class="pre">CreateUserForm.Meta.model</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#VMapp.forms.CreateUserForm.base_fields"><code class="docutils literal notranslate"><span class="pre">CreateUserForm.base_fields</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.forms.CreateUserForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">CreateUserForm.declared_fields</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.forms.CreateUserForm.media"><code class="docutils literal notranslate"><span class="pre">CreateUserForm.media</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#VMapp.forms.CustomUserChangeForm"><code class="docutils literal notranslate"><span class="pre">CustomUserChangeForm</span></code></a><ul>
+<li><a class="reference internal" href="#VMapp.forms.CustomUserChangeForm.Meta"><code class="docutils literal notranslate"><span class="pre">CustomUserChangeForm.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#VMapp.forms.CustomUserChangeForm.Meta.fields"><code class="docutils literal notranslate"><span class="pre">CustomUserChangeForm.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.forms.CustomUserChangeForm.Meta.model"><code class="docutils literal notranslate"><span class="pre">CustomUserChangeForm.Meta.model</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#VMapp.forms.CustomUserChangeForm.base_fields"><code class="docutils literal notranslate"><span class="pre">CustomUserChangeForm.base_fields</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.forms.CustomUserChangeForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">CustomUserChangeForm.declared_fields</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.forms.CustomUserChangeForm.media"><code class="docutils literal notranslate"><span class="pre">CustomUserChangeForm.media</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#VMapp.forms.LoginForm"><code class="docutils literal notranslate"><span class="pre">LoginForm</span></code></a><ul>
+<li><a class="reference internal" href="#VMapp.forms.LoginForm.base_fields"><code class="docutils literal notranslate"><span class="pre">LoginForm.base_fields</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.forms.LoginForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">LoginForm.declared_fields</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.forms.LoginForm.media"><code class="docutils literal notranslate"><span class="pre">LoginForm.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-VMapp.models">VMapp.models module</a><ul>
+<li><a class="reference internal" href="#VMapp.models.UserProfile"><code class="docutils literal notranslate"><span class="pre">UserProfile</span></code></a><ul>
+<li><a class="reference internal" href="#VMapp.models.UserProfile.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">UserProfile.DoesNotExist</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.models.UserProfile.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">UserProfile.MultipleObjectsReturned</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.models.UserProfile.id"><code class="docutils literal notranslate"><span class="pre">UserProfile.id</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.models.UserProfile.objects"><code class="docutils literal notranslate"><span class="pre">UserProfile.objects</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.models.UserProfile.profile_image"><code class="docutils literal notranslate"><span class="pre">UserProfile.profile_image</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.models.UserProfile.user"><code class="docutils literal notranslate"><span class="pre">UserProfile.user</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.models.UserProfile.user_id"><code class="docutils literal notranslate"><span class="pre">UserProfile.user_id</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#VMapp.models.create_user_profile"><code class="docutils literal notranslate"><span class="pre">create_user_profile()</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.models.save_user_profile"><code class="docutils literal notranslate"><span class="pre">save_user_profile()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-VMapp.tests">VMapp.tests module</a></li>
+<li><a class="reference internal" href="#module-VMapp.urls">VMapp.urls module</a></li>
+<li><a class="reference internal" href="#module-VMapp.views">VMapp.views module</a><ul>
+<li><a class="reference internal" href="#VMapp.views.Login"><code class="docutils literal notranslate"><span class="pre">Login</span></code></a><ul>
+<li><a class="reference internal" href="#VMapp.views.Login.dispatch"><code class="docutils literal notranslate"><span class="pre">Login.dispatch()</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.views.Login.form_class"><code class="docutils literal notranslate"><span class="pre">Login.form_class</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.views.Login.form_valid"><code class="docutils literal notranslate"><span class="pre">Login.form_valid()</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.views.Login.success_url"><code class="docutils literal notranslate"><span class="pre">Login.success_url</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.views.Login.template_name"><code class="docutils literal notranslate"><span class="pre">Login.template_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#VMapp.views.SignUp"><code class="docutils literal notranslate"><span class="pre">SignUp</span></code></a><ul>
+<li><a class="reference internal" href="#VMapp.views.SignUp.form_class"><code class="docutils literal notranslate"><span class="pre">SignUp.form_class</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.views.SignUp.form_valid"><code class="docutils literal notranslate"><span class="pre">SignUp.form_valid()</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.views.SignUp.model"><code class="docutils literal notranslate"><span class="pre">SignUp.model</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.views.SignUp.success_url"><code class="docutils literal notranslate"><span class="pre">SignUp.success_url</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.views.SignUp.template_name"><code class="docutils literal notranslate"><span class="pre">SignUp.template_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#VMapp.views.edit_profile"><code class="docutils literal notranslate"><span class="pre">edit_profile()</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.views.home"><code class="docutils literal notranslate"><span class="pre">home()</span></code></a></li>
+<li><a class="reference internal" href="#VMapp.views.logoutUsuario"><code class="docutils literal notranslate"><span class="pre">logoutUsuario()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-VMapp">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <div role="main">
+        
+  <section id="vmapp-package">
+<h1>VMapp package<a class="headerlink" href="#vmapp-package" title="Link to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="VMapp.migrations.html">VMapp.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="VMapp.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VMapp.migrations.html#module-VMapp.migrations.0001_initial">VMapp.migrations.0001_initial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="VMapp.migrations.html#VMapp.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="VMapp.migrations.html#VMapp.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="VMapp.migrations.html#VMapp.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="VMapp.migrations.html#VMapp.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="VMapp.migrations.html#module-VMapp.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-VMapp.admin">
+<span id="vmapp-admin-module"></span><h2>VMapp.admin module<a class="headerlink" href="#module-VMapp.admin" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-VMapp.apps">
+<span id="vmapp-apps-module"></span><h2>VMapp.apps module<a class="headerlink" href="#module-VMapp.apps" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="VMapp.apps.VmappConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">VMapp.apps.</span></span><span class="sig-name descname"><span class="pre">VmappConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/apps.html#VmappConfig"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.apps.VmappConfig" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.apps.VmappConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'VMapp'</span></em><a class="headerlink" href="#VMapp.apps.VmappConfig.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-VMapp.forms">
+<span id="vmapp-forms-module"></span><h2>VMapp.forms module<a class="headerlink" href="#module-VMapp.forms" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="VMapp.forms.CreateUserForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">VMapp.forms.</span></span><span class="sig-name descname"><span class="pre">CreateUserForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/forms.html#CreateUserForm"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.forms.CreateUserForm" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserCreationForm</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="VMapp.forms.CreateUserForm.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="../_modules/VMapp/forms.html#CreateUserForm.Meta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.forms.CreateUserForm.Meta" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.forms.CreateUserForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['first_name',</span> <span class="pre">'last_name',</span> <span class="pre">'email',</span> <span class="pre">'username',</span> <span class="pre">'password1',</span> <span class="pre">'password2']</span></em><a class="headerlink" href="#VMapp.forms.CreateUserForm.Meta.fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.forms.CreateUserForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#VMapp.forms.CreateUserForm.Meta.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.forms.CreateUserForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'email':</span> <span class="pre">&lt;django.forms.fields.EmailField</span> <span class="pre">object&gt;,</span> <span class="pre">'first_name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'last_name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'password1':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'password2':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'username':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#VMapp.forms.CreateUserForm.base_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.forms.CreateUserForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'password1':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'password2':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#VMapp.forms.CreateUserForm.declared_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="VMapp.forms.CreateUserForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#VMapp.forms.CreateUserForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="VMapp.forms.CustomUserChangeForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">VMapp.forms.</span></span><span class="sig-name descname"><span class="pre">CustomUserChangeForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/forms.html#CustomUserChangeForm"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.forms.CustomUserChangeForm" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserChangeForm</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="VMapp.forms.CustomUserChangeForm.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="../_modules/VMapp/forms.html#CustomUserChangeForm.Meta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.forms.CustomUserChangeForm.Meta" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.forms.CustomUserChangeForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['first_name',</span> <span class="pre">'last_name',</span> <span class="pre">'email']</span></em><a class="headerlink" href="#VMapp.forms.CustomUserChangeForm.Meta.fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.forms.CustomUserChangeForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#VMapp.forms.CustomUserChangeForm.Meta.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.forms.CustomUserChangeForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'email':</span> <span class="pre">&lt;django.forms.fields.EmailField</span> <span class="pre">object&gt;,</span> <span class="pre">'first_name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'last_name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'password':</span> <span class="pre">&lt;django.contrib.auth.forms.ReadOnlyPasswordHashField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#VMapp.forms.CustomUserChangeForm.base_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.forms.CustomUserChangeForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'password':</span> <span class="pre">&lt;django.contrib.auth.forms.ReadOnlyPasswordHashField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#VMapp.forms.CustomUserChangeForm.declared_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="VMapp.forms.CustomUserChangeForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#VMapp.forms.CustomUserChangeForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="VMapp.forms.LoginForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">VMapp.forms.</span></span><span class="sig-name descname"><span class="pre">LoginForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/forms.html#LoginForm"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.forms.LoginForm" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AuthenticationForm</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.forms.LoginForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'password':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'username':</span> <span class="pre">&lt;django.contrib.auth.forms.UsernameField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#VMapp.forms.LoginForm.base_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.forms.LoginForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'password':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'username':</span> <span class="pre">&lt;django.contrib.auth.forms.UsernameField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#VMapp.forms.LoginForm.declared_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="VMapp.forms.LoginForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#VMapp.forms.LoginForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-VMapp.models">
+<span id="vmapp-models-module"></span><h2>VMapp.models module<a class="headerlink" href="#module-VMapp.models" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="VMapp.models.UserProfile">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">VMapp.models.</span></span><span class="sig-name descname"><span class="pre">UserProfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profile_image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/models.html#UserProfile"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.models.UserProfile" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="VMapp.models.UserProfile.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#VMapp.models.UserProfile.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="VMapp.models.UserProfile.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#VMapp.models.UserProfile.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.models.UserProfile.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#VMapp.models.UserProfile.id" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.models.UserProfile.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#VMapp.models.UserProfile.objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.models.UserProfile.profile_image">
+<span class="sig-name descname"><span class="pre">profile_image</span></span><a class="headerlink" href="#VMapp.models.UserProfile.profile_image" title="Link to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.models.UserProfile.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#VMapp.models.UserProfile.user" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Restaurant</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">OneToOneField</span><span class="p">(</span><span class="n">Place</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;restaurant&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Restaurant.place</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardOneToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.models.UserProfile.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#VMapp.models.UserProfile.user_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="VMapp.models.create_user_profile">
+<span class="sig-prename descclassname"><span class="pre">VMapp.models.</span></span><span class="sig-name descname"><span class="pre">create_user_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/models.html#create_user_profile"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.models.create_user_profile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="VMapp.models.save_user_profile">
+<span class="sig-prename descclassname"><span class="pre">VMapp.models.</span></span><span class="sig-name descname"><span class="pre">save_user_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/models.html#save_user_profile"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.models.save_user_profile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-VMapp.tests">
+<span id="vmapp-tests-module"></span><h2>VMapp.tests module<a class="headerlink" href="#module-VMapp.tests" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-VMapp.urls">
+<span id="vmapp-urls-module"></span><h2>VMapp.urls module<a class="headerlink" href="#module-VMapp.urls" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-VMapp.views">
+<span id="vmapp-views-module"></span><h2>VMapp.views module<a class="headerlink" href="#module-VMapp.views" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="VMapp.views.Login">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">VMapp.views.</span></span><span class="sig-name descname"><span class="pre">Login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/views.html#Login"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.views.Login" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FormView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="VMapp.views.Login.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/views.html#Login.dispatch"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.views.Login.dispatch" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.views.Login.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#VMapp.views.Login.form_class" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#VMapp.forms.LoginForm" title="VMapp.forms.LoginForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoginForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="VMapp.views.Login.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/views.html#Login.form_valid"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.views.Login.form_valid" title="Link to this definition">¶</a></dt>
+<dd><p>If the form is valid, redirect to the supplied URL.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.views.Login.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/project/'</span></em><a class="headerlink" href="#VMapp.views.Login.success_url" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.views.Login.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'VMapp/login.html'</span></em><a class="headerlink" href="#VMapp.views.Login.template_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="VMapp.views.SignUp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">VMapp.views.</span></span><span class="sig-name descname"><span class="pre">SignUp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/views.html#SignUp"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.views.SignUp" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.views.SignUp.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#VMapp.views.SignUp.form_class" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#VMapp.forms.CreateUserForm" title="VMapp.forms.CreateUserForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">CreateUserForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="VMapp.views.SignUp.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/views.html#SignUp.form_valid"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.views.SignUp.form_valid" title="Link to this definition">¶</a></dt>
+<dd><p>If the form is valid, save the associated model.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.views.SignUp.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#VMapp.views.SignUp.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.views.SignUp.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/accounts/login/'</span></em><a class="headerlink" href="#VMapp.views.SignUp.success_url" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="VMapp.views.SignUp.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'VMapp/signup.html'</span></em><a class="headerlink" href="#VMapp.views.SignUp.template_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="VMapp.views.edit_profile">
+<span class="sig-prename descclassname"><span class="pre">VMapp.views.</span></span><span class="sig-name descname"><span class="pre">edit_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/views.html#edit_profile"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.views.edit_profile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="VMapp.views.home">
+<span class="sig-prename descclassname"><span class="pre">VMapp.views.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/views.html#home"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.views.home" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="VMapp.views.logoutUsuario">
+<span class="sig-prename descclassname"><span class="pre">VMapp.views.</span></span><span class="sig-name descname"><span class="pre">logoutUsuario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/VMapp/views.html#logoutUsuario"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#VMapp.views.logoutUsuario" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-VMapp">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-VMapp" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, PRIS-Lab.
+      Creado usando <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

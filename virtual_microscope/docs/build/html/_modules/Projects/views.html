@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects.views &#8212; documentación de Microscopio Virtual - 1.0.0</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/scrolls.css?v=b5349046" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script src="../../_static/documentation_options.js?v=36c4ab74"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../../_static/theme_extras.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+  </head><body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="../../index.html"
+          title="back to the documentation overview"><span>Projects.views</span></a></h1>
+      </div>
+      <div class="relnav" role="navigation" aria-label="related navigation">
+        <a href="#">Projects.views</a>
+      </div>
+      <div id="contentwrapper">
+        <div role="main">
+        
+  <h1>Código fuente para Projects.views</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">redirect</span>
+<span class="kn">from</span> <span class="nn">django.views.generic</span> <span class="kn">import</span> <span class="n">CreateView</span>
+<span class="kn">from</span> <span class="nn">django.views</span> <span class="kn">import</span> <span class="n">generic</span>
+<span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">Template</span><span class="p">,</span> <span class="n">context</span>
+<span class="kn">from</span> <span class="nn">django.views.generic.edit</span> <span class="kn">import</span> <span class="n">FormView</span><span class="p">,</span> <span class="n">DeleteView</span>
+<span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">Q</span>
+<span class="kn">from</span> <span class="nn">Projects.forms</span> <span class="kn">import</span> <span class="n">NoteForm</span><span class="p">,</span> <span class="n">ProjectForm</span><span class="p">,</span> <span class="n">SearchForm</span><span class="p">,</span> <span class="n">ProjectSlideForm</span><span class="p">,</span> <span class="n">MensajeForm</span>
+<span class="kn">from</span> <span class="nn">Projects.models</span> <span class="kn">import</span> <span class="n">Project</span><span class="p">,</span> <span class="n">Notes</span><span class="p">,</span> <span class="n">ProjectSlide</span><span class="p">,</span> <span class="n">Message</span>
+<span class="kn">from</span> <span class="nn">Microscopio.models</span> <span class="kn">import</span> <span class="n">Slide</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">JsonResponse</span>
+<span class="kn">from</span> <span class="nn">django.template.loader</span> <span class="kn">import</span> <span class="n">render_to_string</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">django.core.paginator</span> <span class="kn">import</span> <span class="n">Paginator</span>
+<span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">timezone</span>
+<span class="kn">from</span> <span class="nn">django.utils.decorators</span> <span class="kn">import</span> <span class="n">method_decorator</span>
+<span class="kn">from</span> <span class="nn">.decorators</span> <span class="kn">import</span> <span class="n">user_is_project_collaborator</span> 
+
+
+
+
+<div class="viewcode-block" id="projects">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projects">[documentos]</a>
+<span class="k">class</span> <span class="nc">projects</span><span class="p">(</span><span class="n">generic</span><span class="o">.</span><span class="n">ListView</span><span class="p">,</span><span class="n">FormView</span><span class="p">,):</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;Projects/projectList.html&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+    <span class="n">form_class</span> <span class="o">=</span> <span class="n">ProjectForm</span>
+    <span class="n">paginate_by</span> <span class="o">=</span> <span class="mi">12</span>
+    
+<div class="viewcode-block" id="projects.get_queryset">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projects.get_queryset">[documentos]</a>
+    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">queryset2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;buscar&#39;</span><span class="p">)</span>
+        <span class="n">usuario</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span>
+        <span class="n">consulta</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">usuario</span><span class="p">)</span> <span class="o">|</span> <span class="n">Q</span><span class="p">(</span><span class="n">sharedUsers</span><span class="o">=</span><span class="n">usuario</span><span class="p">)</span>
+        <span class="n">queryset</span> <span class="o">=</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">consulta</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">queryset2</span><span class="p">:</span>
+        
+            <span class="n">palabras</span> <span class="o">=</span> <span class="n">queryset2</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">condiciones_busqueda</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">palabras</span><span class="p">:</span>
+                <span class="n">condicion</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">palabra</span><span class="p">)</span>
+                <span class="n">condicion2</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">description__icontains</span><span class="o">=</span><span class="n">palabra</span><span class="p">)</span> 
+                <span class="n">condiciones_busqueda</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condicion</span><span class="p">)</span>
+                <span class="n">condiciones_busqueda</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condicion2</span><span class="p">)</span>
+
+            <span class="n">consulta</span> <span class="o">=</span> <span class="n">Q</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">condicion</span> <span class="ow">in</span> <span class="n">condiciones_busqueda</span><span class="p">:</span>
+                <span class="n">consulta</span> <span class="o">|=</span> <span class="n">condicion</span>
+            <span class="n">queryset</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">consulta</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">queryset</span></div>
+
+
+
+
+<div class="viewcode-block" id="projects.get_success_url">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projects.get_success_url">[documentos]</a>
+    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">path</span></div>
+
+
+<div class="viewcode-block" id="projects.get_context_data">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projects.get_context_data">[documentos]</a>
+    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">projects</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ProjectForm</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;slideSel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;invite&#39;</span><span class="p">]</span><span class="o">=</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">invitedUsers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">path</span> <span class="o">!=</span> <span class="s1">&#39;/project/&#39;</span><span class="p">:</span>
+            <span class="n">object_instance</span> <span class="o">=</span> <span class="n">Slide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;slideId&#39;</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">slide</span> <span class="ow">in</span> <span class="n">object_instance</span><span class="p">:</span>
+                <span class="n">context</span><span class="p">[</span><span class="s1">&#39;slideSel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">slide</span>
+                <span class="n">context</span><span class="p">[</span><span class="s1">&#39;make&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">context</span></div>
+
+
+<div class="viewcode-block" id="projects.post">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projects.post">[documentos]</a>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">object_instance</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">ProjectForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="c1"># print(&#39;jos&#39;)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="c1"># mySlides = Slide.objects.filter(name=request.POST.get(&#39;slide&#39;, &#39;&#39;))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;slide&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+            <span class="c1"># for slide in mySlides:</span>
+                <span class="c1"># mySlide = slide</span>
+            <span class="n">instancia</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">instancia</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">object_instance</span>
+            <span class="n">instancia</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="n">Message</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                <span class="n">project_id</span><span class="o">=</span><span class="n">instancia</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="n">user</span><span class="o">=</span><span class="n">object_instance</span><span class="p">,</span>
+                <span class="n">contenido</span><span class="o">=</span><span class="s1">&#39;Bienvenidos&#39;</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div>
+</div>
+
+    
+
+
+<div class="viewcode-block" id="projectSlideDetail">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projectSlideDetail">[documentos]</a>
+<span class="k">class</span> <span class="nc">projectSlideDetail</span><span class="p">(</span><span class="n">generic</span><span class="o">.</span><span class="n">DetailView</span><span class="p">,</span><span class="n">FormView</span><span class="p">):</span>
+    <span class="c1"># note = Notes.objects.all()</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;Projects/projectSlide.html&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ProjectSlide</span>
+    <span class="n">form_class</span> <span class="o">=</span> <span class="n">ProjectSlideForm</span>
+     
+
+<div class="viewcode-block" id="projectSlideDetail.get_success_url">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projectSlideDetail.get_success_url">[documentos]</a>
+    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">path</span></div>
+
+
+<div class="viewcode-block" id="projectSlideDetail.get_context_data">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projectSlideDetail.get_context_data">[documentos]</a>
+    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">projectSlideDetail</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;projectSlide&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;plates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ProjectSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;projectSlide&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">project</span><span class="p">)</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;apuntes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Notes</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;projectSlide&#39;</span><span class="p">],</span><span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span> 
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;apuntesHidden&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Notes</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;projectSlide&#39;</span><span class="p">],</span><span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span> 
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;notes&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">NoteForm</span>
+        <span class="n">elementos</span> <span class="o">=</span> <span class="n">Notes</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">geojson_data</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">project</span><span class="o">=</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;projectSlide&#39;</span><span class="p">])</span> <span class="c1"># Recupera los modelos con el campo &#39;show&#39; verdadero</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;geojson_list&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;geojson&quot;</span><span class="p">:</span> <span class="n">elemento</span><span class="o">.</span><span class="n">geojson_data</span><span class="p">}</span> <span class="k">for</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="n">elementos</span><span class="p">]</span>
+        <span class="c1"># context[&#39;notes&#39;] = apuntes</span>
+        <span class="k">return</span> <span class="n">context</span></div>
+
+
+<div class="viewcode-block" id="projectSlideDetail.post">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projectSlideDetail.post">[documentos]</a>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">object_instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
+        
+        <span class="n">form</span> <span class="o">=</span> <span class="n">NoteForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">instancia</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">instancia</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">object_instance</span>
+            <span class="n">instancia</span><span class="o">.</span><span class="n">xUnoPos</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">instancia</span><span class="o">.</span><span class="n">yUnoPos</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">instancia</span><span class="o">.</span><span class="n">xDosPos</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="n">instancia</span><span class="o">.</span><span class="n">yDosPos</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="n">instancia</span><span class="o">.</span><span class="n">show</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">instancia</span><span class="o">.</span><span class="n">geojson_data</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">instancia</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">FormView</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</div>
+
+    
+<div class="viewcode-block" id="projectDetail">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projectDetail">[documentos]</a>
+<span class="k">class</span> <span class="nc">projectDetail</span><span class="p">(</span><span class="n">generic</span><span class="o">.</span><span class="n">DetailView</span><span class="p">,</span><span class="n">FormView</span><span class="p">,</span><span class="n">DeleteView</span><span class="p">):</span>
+    <span class="c1"># note = Notes.objects.all()</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;Projects/project.html&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+    <span class="n">form_class</span> <span class="o">=</span> <span class="n">ProjectSlideForm</span>
+    
+     
+
+<div class="viewcode-block" id="projectDetail.get_success_url">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projectDetail.get_success_url">[documentos]</a>
+    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">path</span></div>
+
+
+<div class="viewcode-block" id="projectDetail.get_context_data">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projectDetail.get_context_data">[documentos]</a>
+    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">projectDetail</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">projectSelf</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
+        <span class="n">placas</span> <span class="o">=</span> <span class="n">ProjectSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">projectSelf</span><span class="o">.</span><span class="n">project</span><span class="p">)</span>
+        <span class="n">catalogo</span> <span class="o">=</span> <span class="n">Slide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">idNum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;map&#39;</span><span class="p">]</span>
+        <span class="n">usuarios</span> <span class="o">=</span> <span class="n">projectSelf</span><span class="o">.</span><span class="n">sharedUsers</span>
+        <span class="c1">#pk = ProjectSlide.objects.filter(project=context[&#39;pk&#39;])</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ProjectSlideForm</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;plates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">placas</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;catalogo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">catalogo</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;usuarios&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">usuarios</span>
+        
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;slideSel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;slideId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># context[&#39;make&#39;] = str(self.kwargs[&#39;sel&#39;])</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;pk&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;pk&#39;</span><span class="p">])</span>
+      
+        <span class="k">return</span> <span class="n">context</span></div>
+
+    
+<div class="viewcode-block" id="projectDetail.get">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projectDetail.get">[documentos]</a>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># context = super(projectDetail, self).get_context_data(**kwargs)</span>
+        <span class="n">form_b</span> <span class="o">=</span> <span class="n">MensajeForm</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">ProjectSlideForm</span>
+        <span class="n">project</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
+        <span class="n">plates</span>  <span class="o">=</span> <span class="n">ProjectSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">())</span>
+        
+        <span class="n">pk</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;pk&#39;</span><span class="p">])</span>
+        <span class="n">queryset</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;buscar&#39;</span><span class="p">)</span>
+        <span class="n">ver</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ver&#39;</span><span class="p">)</span>
+        <span class="n">numUser</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">project</span><span class="o">.</span><span class="n">sharedUsers</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="n">numUser</span> <span class="o">=</span> <span class="n">numUser</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="n">numPlacas</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">plates</span><span class="p">:</span>
+            <span class="n">numPlacas</span> <span class="o">=</span> <span class="n">numPlacas</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+        <span class="n">mapNum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;map&#39;</span><span class="p">]</span>
+        <span class="n">optionNum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;option&#39;</span><span class="p">]</span>
+        <span class="n">mapSlide</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">geojson_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">optionNum</span> <span class="o">==</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">mapNum</span><span class="p">):</span>
+                <span class="n">mapSlide</span> <span class="o">=</span> <span class="n">ProjectSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">mapNum</span><span class="p">)</span>
+                <span class="c1"># projec_slide_instance = ProjectSlide.objects.get(id=mapNum)</span>
+                <span class="n">form</span> <span class="o">=</span> <span class="n">ProjectSlideForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">mapSlide</span><span class="p">)</span>
+                <span class="n">elementos</span> <span class="o">=</span> <span class="n">Notes</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">geojson_data</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">project</span><span class="o">=</span><span class="n">mapSlide</span><span class="p">)</span>  <span class="c1"># Recupera los modelos con el campo &#39;show&#39; verdadero</span>
+                <span class="n">geojson_list</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;geojson&quot;</span><span class="p">:</span> <span class="n">elemento</span><span class="o">.</span><span class="n">geojson_data</span><span class="p">}</span> <span class="k">for</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="n">elementos</span><span class="p">]</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">optionNum</span> <span class="o">==</span><span class="mi">2</span><span class="p">):</span>
+                <span class="n">mapSlide</span> <span class="o">=</span> <span class="n">Slide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">mapNum</span><span class="p">)</span>
+        <span class="n">placaID</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;placaId&#39;</span><span class="p">)</span>
+        <span class="n">catalogo</span> <span class="o">=</span> <span class="n">Slide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">mySlide</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">slideName</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">placaID</span><span class="p">:</span>
+            <span class="n">mySlide</span> <span class="o">=</span> <span class="n">Slide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">placaID</span><span class="p">)</span>
+            <span class="n">slideName</span> <span class="o">=</span> <span class="n">mySlide</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">if</span> <span class="n">queryset</span><span class="p">:</span>
+            <span class="n">palabras</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">condiciones_busqueda</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">palabras</span><span class="p">:</span>
+                <span class="n">condicion</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">palabra</span><span class="p">)</span>
+                <span class="n">condicion2</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">description__icontains</span><span class="o">=</span><span class="n">palabra</span><span class="p">)</span> 
+                <span class="n">condiciones_busqueda</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condicion</span><span class="p">)</span>
+                <span class="n">condiciones_busqueda</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condicion2</span><span class="p">)</span>
+
+            <span class="n">consulta</span> <span class="o">=</span> <span class="n">Q</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">condicion</span> <span class="ow">in</span> <span class="n">condiciones_busqueda</span><span class="p">:</span>
+                <span class="n">consulta</span> <span class="o">|=</span> <span class="n">condicion</span>
+
+            <span class="n">catalogo</span> <span class="o">=</span> <span class="n">Slide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">consulta</span><span class="p">)</span>
+            
+        <span class="n">paginator</span> <span class="o">=</span> <span class="n">Paginator</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>
+        <span class="n">user_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span>
+        <span class="k">if</span> <span class="n">ver</span><span class="p">:</span>
+            <span class="n">paginator</span> <span class="o">=</span> <span class="n">Paginator</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+        
+        <span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">)</span>
+        <span class="nb">list</span> <span class="o">=</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">sharedUsers</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        
+        <span class="n">catalogo</span> <span class="o">=</span> <span class="n">paginator</span><span class="o">.</span><span class="n">get_page</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s2">&quot;Projects/project.html&quot;</span><span class="p">,{</span><span class="s1">&#39;member&#39;</span><span class="p">:</span><span class="n">member</span><span class="p">,</span><span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span><span class="s1">&#39;geojson_list&#39;</span><span class="p">:</span><span class="n">geojson_list</span><span class="p">,</span><span class="s1">&#39;catalogo&#39;</span><span class="p">:</span><span class="n">catalogo</span><span class="p">,</span><span class="s1">&#39;numPlacas&#39;</span><span class="p">:</span><span class="n">numPlacas</span><span class="p">,</span><span class="s1">&#39;numUser&#39;</span><span class="p">:</span><span class="n">numUser</span><span class="p">,</span><span class="s1">&#39;optionNum&#39;</span><span class="p">:</span><span class="n">optionNum</span><span class="p">,</span><span class="s1">&#39;mapSlide&#39;</span><span class="p">:</span><span class="n">mapSlide</span><span class="p">,</span><span class="s1">&#39;project&#39;</span><span class="p">:</span><span class="n">project</span><span class="p">,</span><span class="s1">&#39;ver&#39;</span><span class="p">:</span><span class="n">ver</span><span class="p">,</span><span class="s1">&#39;form&#39;</span><span class="p">:</span><span class="n">form</span><span class="p">,</span><span class="s1">&#39;form_b&#39;</span><span class="p">:</span><span class="n">form_b</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">:</span><span class="n">pk</span><span class="p">,</span><span class="s1">&#39;placaId&#39;</span><span class="p">:</span><span class="n">placaID</span><span class="p">,</span><span class="s1">&#39;slideName&#39;</span><span class="p">:</span><span class="n">slideName</span><span class="p">,</span><span class="s1">&#39;plates&#39;</span><span class="p">:</span><span class="n">plates</span><span class="p">})</span></div>
+
+    
+    
+<div class="viewcode-block" id="projectDetail.post">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projectDetail.post">[documentos]</a>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">object_instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span> 
+        <span class="n">idNum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;map&#39;</span><span class="p">]</span>
+        <span class="n">optionNum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;option&#39;</span><span class="p">]</span>
+        <span class="n">form_b</span> <span class="o">=</span> <span class="n">MensajeForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">optionNum</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">projec_slide_instance</span> <span class="o">=</span> <span class="n">ProjectSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span> <span class="n">idNum</span> <span class="p">)</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="n">ProjectSlideForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span><span class="n">instance</span><span class="o">=</span><span class="n">projec_slide_instance</span><span class="p">)</span>
+        <span class="k">elif</span><span class="p">(</span><span class="n">optionNum</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="n">ProjectSlideForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="c1"># print(&#39;jos&#39;)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">instancia</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">instancia</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">object_instance</span>
+            <span class="c1"># instancia.placaId = request.POST.get(&#39;placaId&#39;)</span>
+            <span class="n">mySlide</span> <span class="o">=</span> <span class="n">Slide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;slide&#39;</span><span class="p">))</span>
+            <span class="c1"># mySlide = None</span>
+            <span class="c1"># # print(request.POST.get(&#39;slide&#39;, &#39;&#39;))</span>
+            <span class="c1"># for slide in mySlides:</span>
+            <span class="c1">#     mySlide = slide</span>
+            <span class="c1"># instancia.user = object_instance</span>
+            <span class="n">instancia</span><span class="o">.</span><span class="n">slide</span> <span class="o">=</span> <span class="n">mySlide</span>
+            <span class="n">instancia</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">form_b</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">instancia</span> <span class="o">=</span> <span class="n">form_b</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div>
+</div>
+
+    
+<div class="viewcode-block" id="projectProfileDetail">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projectProfileDetail">[documentos]</a>
+<span class="k">class</span> <span class="nc">projectProfileDetail</span><span class="p">(</span><span class="n">generic</span><span class="o">.</span><span class="n">DetailView</span><span class="p">,</span><span class="n">FormView</span><span class="p">,</span><span class="n">DeleteView</span><span class="p">):</span>
+    <span class="c1"># note = Notes.objects.all()</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;Projects/projectProfile.html&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+    
+     
+
+<div class="viewcode-block" id="projectProfileDetail.get_success_url">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projectProfileDetail.get_success_url">[documentos]</a>
+    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">path</span></div>
+
+
+<div class="viewcode-block" id="projectProfileDetail.get_context_data">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projectProfileDetail.get_context_data">[documentos]</a>
+    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">projectDetail</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">projectSelf</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
+        <span class="n">placas</span> <span class="o">=</span> <span class="n">ProjectSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">projectSelf</span><span class="o">.</span><span class="n">project</span><span class="p">)</span>
+        <span class="n">catalogo</span> <span class="o">=</span> <span class="n">Slide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">idNum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;map&#39;</span><span class="p">]</span>
+        <span class="n">usuarios</span> <span class="o">=</span> <span class="n">projectSelf</span><span class="o">.</span><span class="n">sharedUsers</span>
+        <span class="c1">#pk = ProjectSlide.objects.filter(project=context[&#39;pk&#39;])</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ProjectSlideForm</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;plates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">placa</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;catalogo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">catalogo</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;usuarios&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">usuarios</span>
+        
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;slideSel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;slideId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># context[&#39;make&#39;] = str(self.kwargs[&#39;sel&#39;])</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;pk&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;pk&#39;</span><span class="p">])</span>
+      
+        <span class="k">return</span> <span class="n">context</span></div>
+
+    
+<div class="viewcode-block" id="projectProfileDetail.get">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.projectProfileDetail.get">[documentos]</a>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># context = super(projectDetail, self).get_context_data(**kwargs)</span>
+        
+        <span class="n">project</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
+        <span class="n">plates</span>  <span class="o">=</span> <span class="n">ProjectSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">())</span>
+        
+        <span class="n">pk</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;pk&#39;</span><span class="p">])</span>
+        <span class="n">queryset</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;buscar&#39;</span><span class="p">)</span>
+        <span class="n">ver</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ver&#39;</span><span class="p">)</span>
+        <span class="n">numUser</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">project</span><span class="o">.</span><span class="n">sharedUsers</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="n">numUser</span> <span class="o">=</span> <span class="n">numUser</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="n">numPlacas</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">plates</span><span class="p">:</span>
+            <span class="n">numPlacas</span> <span class="o">=</span> <span class="n">numPlacas</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+        <span class="n">mapNum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;map&#39;</span><span class="p">]</span>
+        <span class="n">optionNum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;option&#39;</span><span class="p">]</span>
+        <span class="n">mapSlide</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">geojson_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">optionNum</span> <span class="o">==</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">mapNum</span><span class="p">):</span>
+                <span class="n">mapSlide</span> <span class="o">=</span> <span class="n">ProjectSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">mapNum</span><span class="p">)</span>
+                <span class="n">elementos</span> <span class="o">=</span> <span class="n">Notes</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">geojson_data</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">project</span><span class="o">=</span><span class="n">mapSlide</span><span class="p">)</span>  <span class="c1"># Recupera los modelos con el campo &#39;show&#39; verdadero</span>
+                <span class="n">geojson_list</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;geojson&quot;</span><span class="p">:</span> <span class="n">elemento</span><span class="o">.</span><span class="n">geojson_data</span><span class="p">}</span> <span class="k">for</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="n">elementos</span><span class="p">]</span>
+        
+        <span class="n">placaID</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;placaId&#39;</span><span class="p">)</span>
+        <span class="n">mySlide</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">slideName</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">placaID</span><span class="p">:</span>
+            <span class="n">mySlide</span> <span class="o">=</span> <span class="n">Slide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">placaID</span><span class="p">)</span>
+            <span class="n">slideName</span> <span class="o">=</span> <span class="n">mySlide</span><span class="o">.</span><span class="n">name</span>
+      
+            
+        <span class="nb">list</span> <span class="o">=</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">sharedUsers</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">user_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span>
+        
+        <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s2">&quot;Projects/projectProfile.html&quot;</span><span class="p">,{</span><span class="s1">&#39;member&#39;</span><span class="p">:</span><span class="n">member</span><span class="p">,</span><span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span><span class="s1">&#39;geojson_list&#39;</span><span class="p">:</span><span class="n">geojson_list</span><span class="p">,</span><span class="s1">&#39;numPlacas&#39;</span><span class="p">:</span><span class="n">numPlacas</span><span class="p">,</span><span class="s1">&#39;numUser&#39;</span><span class="p">:</span><span class="n">numUser</span><span class="p">,</span><span class="s1">&#39;optionNum&#39;</span><span class="p">:</span><span class="n">optionNum</span><span class="p">,</span><span class="s1">&#39;mapSlide&#39;</span><span class="p">:</span><span class="n">mapSlide</span><span class="p">,</span><span class="s1">&#39;project&#39;</span><span class="p">:</span><span class="n">project</span><span class="p">,</span><span class="s1">&#39;ver&#39;</span><span class="p">:</span><span class="n">ver</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">:</span><span class="n">pk</span><span class="p">,</span><span class="s1">&#39;placaId&#39;</span><span class="p">:</span><span class="n">placaID</span><span class="p">,</span><span class="s1">&#39;slideName&#39;</span><span class="p">:</span><span class="n">slideName</span><span class="p">,</span><span class="s1">&#39;plates&#39;</span><span class="p">:</span><span class="n">plates</span><span class="p">})</span></div>
+</div>
+
+    
+    
+
+<div class="viewcode-block" id="noteDetail">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.noteDetail">[documentos]</a>
+<span class="k">class</span> <span class="nc">noteDetail</span><span class="p">(</span><span class="n">generic</span><span class="o">.</span><span class="n">DetailView</span><span class="p">):</span>
+    <span class="c1"># note = Notes.objects.all()</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;Projects/note.html&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Notes</span>
+    
+
+<div class="viewcode-block" id="noteDetail.get_context_data">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.noteDetail.get_context_data">[documentos]</a>
+    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">noteDetail</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;note&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
+        <span class="n">apuntes</span> <span class="o">=</span> <span class="n">Notes</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;note&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">project</span><span class="p">)</span>
+        <span class="n">project</span> <span class="o">=</span> <span class="n">ProjectSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;project_id&#39;</span><span class="p">])</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;apuntes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">apuntes</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;projectSlide&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">project</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;apuntes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Notes</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;projectSlide&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span> 
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">NoteForm</span>
+        <span class="n">excludeNotes</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">geojson_data</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">|</span> <span class="n">Q</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;note&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">elementos</span> <span class="o">=</span> <span class="n">Notes</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">excludeNotes</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">project</span><span class="o">=</span><span class="n">project</span><span class="p">)</span> <span class="c1"># Recupera los modelos con el campo &#39;show&#39; verdadero</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;geojson_list&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;geojson&quot;</span><span class="p">:</span> <span class="n">elemento</span><span class="o">.</span><span class="n">geojson_data</span><span class="p">}</span> <span class="k">for</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="n">elementos</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">context</span></div>
+
+    
+<div class="viewcode-block" id="noteDetail.post">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.noteDetail.post">[documentos]</a>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="n">option</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">))</span>
+        <span class="n">note_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;pk&#39;</span><span class="p">]</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">option</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">note_instance</span> <span class="o">=</span> <span class="n">Notes</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span> <span class="n">note_id</span> <span class="p">)</span>
+            <span class="n">geojson_data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;geojson_data&#39;</span><span class="p">)</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="n">NoteForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span><span class="n">instance</span><span class="o">=</span><span class="n">note_instance</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="n">NoteForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="n">object_instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">project</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">instancia</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">option</span><span class="p">):</span>
+                <span class="n">instancia</span><span class="o">.</span><span class="n">geojson_data</span> <span class="o">=</span> <span class="n">geojson_data</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">instancia</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">object_instance</span>
+                <span class="n">instancia</span><span class="o">.</span><span class="n">xUnoPos</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">instancia</span><span class="o">.</span><span class="n">yUnoPos</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">instancia</span><span class="o">.</span><span class="n">xDosPos</span> <span class="o">=</span> <span class="mi">2</span>
+                <span class="n">instancia</span><span class="o">.</span><span class="n">yDosPos</span> <span class="o">=</span> <span class="mi">2</span>
+                <span class="n">instancia</span><span class="o">.</span><span class="n">show</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">instancia</span><span class="o">.</span><span class="n">geojson_data</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">instancia</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="n">new_url</span> <span class="o">=</span> <span class="s1">&#39;/projectSlideDetail/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">object_instance</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">new_url</span><span class="p">)</span></div>
+</div>
+
+    
+
+<div class="viewcode-block" id="obtener_lista">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.obtener_lista">[documentos]</a>
+<span class="k">def</span> <span class="nf">obtener_lista</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="c1"># Aquí debes obtener la lista actualizada desde tu modelo o cualquier otra fuente de datos</span>
+    <span class="n">lista_actualizada</span> <span class="o">=</span> <span class="n">Notes</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>  <span class="c1"># Por ejemplo, obtenemos todos los objetos del modelo y los convertimos a diccionario</span>
+
+    <span class="c1"># Devuelve los datos en formato JSON</span>
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">lista_actualizada</span><span class="p">),</span> <span class="n">safe</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="delete">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.delete">[documentos]</a>
+<span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">nota_id</span><span class="p">):</span>
+    <span class="n">instancia</span> <span class="o">=</span> <span class="n">Notes</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">nota_id</span><span class="p">)</span>
+    <span class="n">new_url</span> <span class="o">=</span> <span class="s1">&#39;/projectSlideDetail/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">instancia</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="n">instancia</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">new_url</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="deleteProject">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.deleteProject">[documentos]</a>
+<span class="k">def</span> <span class="nf">deleteProject</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">project_id</span><span class="p">):</span>
+    <span class="n">instancia</span> <span class="o">=</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">project_id</span><span class="p">)</span>
+    <span class="n">new_url</span> <span class="o">=</span> <span class="s1">&#39;project-list&#39;</span>
+    <span class="n">instancia</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">new_url</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="deleteProjectSlide">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.deleteProjectSlide">[documentos]</a>
+<span class="k">def</span> <span class="nf">deleteProjectSlide</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">project_id</span><span class="p">):</span>
+    <span class="n">instancia</span> <span class="o">=</span> <span class="n">ProjectSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">project_id</span><span class="p">)</span>
+    <span class="n">new_url</span> <span class="o">=</span> <span class="n">instancia</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">get_absolute_url</span><span class="p">()</span>
+    <span class="n">instancia</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">new_url</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="showNote">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.showNote">[documentos]</a>
+<span class="k">def</span> <span class="nf">showNote</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">project_id</span><span class="p">,</span> <span class="n">note_id</span><span class="p">):</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="n">Notes</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">note_id</span><span class="p">)</span>
+    <span class="n">note</span><span class="o">.</span><span class="n">show</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">note</span><span class="o">.</span><span class="n">show</span> 
+    <span class="n">note</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="n">new_url</span> <span class="o">=</span> <span class="s1">&#39;/projectSlideDetail/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">project_id</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">new_url</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="deleteProjectUser">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.deleteProjectUser">[documentos]</a>
+<span class="k">def</span> <span class="nf">deleteProjectUser</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">project_id</span><span class="p">,</span><span class="n">projectUser_id</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">projectUser_id</span><span class="p">)</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">project_id</span><span class="p">)</span>
+    <span class="n">proyecto</span><span class="o">.</span><span class="n">sharedUsers</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">usuario</span><span class="p">)</span>
+    
+    <span class="n">new_url</span> <span class="o">=</span> <span class="s1">&#39;/projectDetail/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">project_id</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;/3/0&#39;</span>
+
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">new_url</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="newProjectUser">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.newProjectUser">[documentos]</a>
+<span class="k">def</span> <span class="nf">newProjectUser</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">project_id</span><span class="p">,</span><span class="n">projectUser_id</span><span class="p">):</span>
+
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">projectUser_id</span><span class="p">)</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">project_id</span><span class="p">)</span>
+    <span class="n">proyecto</span><span class="o">.</span><span class="n">invitedUsers</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">usuario</span><span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">proyecto</span><span class="o">.</span><span class="n">user</span> <span class="o">!=</span> <span class="n">usuario</span><span class="p">):</span>
+        <span class="n">proyecto</span><span class="o">.</span><span class="n">sharedUsers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">usuario</span><span class="p">)</span>
+    <span class="n">new_url</span> <span class="o">=</span> <span class="s1">&#39;/projectDetail/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">project_id</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;/1/0&#39;</span>
+
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">new_url</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="deleteProjectInvitedUser">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.deleteProjectInvitedUser">[documentos]</a>
+<span class="k">def</span> <span class="nf">deleteProjectInvitedUser</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">project_id</span><span class="p">,</span><span class="n">projectUser_id</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">projectUser_id</span><span class="p">)</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">project_id</span><span class="p">)</span>
+    <span class="n">proyecto</span><span class="o">.</span><span class="n">invitedUsers</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">usuario</span><span class="p">)</span>
+    
+    <span class="n">new_url</span> <span class="o">=</span> <span class="s1">&#39;/project-list/&#39;</span>
+
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">new_url</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="newProjectInvitedUser">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.newProjectInvitedUser">[documentos]</a>
+<span class="k">def</span> <span class="nf">newProjectInvitedUser</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">project_id</span><span class="p">,</span><span class="n">projectUser_id</span><span class="p">):</span>
+
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">projectUser_id</span><span class="p">)</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">project_id</span><span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">proyecto</span><span class="o">.</span><span class="n">user</span> <span class="o">!=</span> <span class="n">usuario</span><span class="p">):</span>
+        <span class="n">proyecto</span><span class="o">.</span><span class="n">invitedUsers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">usuario</span><span class="p">)</span>
+    <span class="n">new_url</span> <span class="o">=</span> <span class="s1">&#39;/projectDetail/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">project_id</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;/3/0&#39;</span>
+
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">new_url</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="datos_actualizados_catalogo">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.datos_actualizados_catalogo">[documentos]</a>
+<span class="k">def</span> <span class="nf">datos_actualizados_catalogo</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    
+
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;buscar&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">Slide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> 
+    <span class="k">if</span> <span class="n">queryset</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">queryset</span> <span class="o">==</span> <span class="s1">&#39;_&#39;</span><span class="p">:</span>
+        <span class="n">palabras</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">condiciones_busqueda</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">palabras</span><span class="p">:</span>
+            <span class="n">condicion</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">palabra</span><span class="p">)</span>
+            <span class="n">condicion2</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">description__icontains</span><span class="o">=</span><span class="n">palabra</span><span class="p">)</span> 
+            <span class="n">condiciones_busqueda</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condicion</span><span class="p">)</span>
+            <span class="n">condiciones_busqueda</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condicion2</span><span class="p">)</span>
+
+        <span class="n">consulta</span> <span class="o">=</span> <span class="n">Q</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">condicion</span> <span class="ow">in</span> <span class="n">condiciones_busqueda</span><span class="p">:</span>
+            <span class="n">consulta</span> <span class="o">|=</span> <span class="n">condicion</span>
+
+        <span class="n">items</span> <span class="o">=</span> <span class="n">Slide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">consulta</span><span class="p">)</span>
+        
+    <span class="n">paginator</span> <span class="o">=</span> <span class="n">Paginator</span><span class="p">(</span><span class="n">items</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+    
+    <span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">)</span>
+        
+        
+    <span class="n">items</span><span class="o">=</span> <span class="n">paginator</span><span class="o">.</span><span class="n">get_page</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+    
+    <span class="n">nombres</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">]</span>
+    <span class="n">idList</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">]</span>
+    <span class="n">imagenes</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">url</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">]</span>
+    <span class="n">descripcion</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">description</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">nombres</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="n">idList</span><span class="p">,</span><span class="s1">&#39;image&#39;</span><span class="p">:</span><span class="n">imagenes</span><span class="p">,</span><span class="s1">&#39;description&#39;</span><span class="p">:</span><span class="n">descripcion</span><span class="p">},</span> <span class="n">safe</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  </div>
+
+
+<div class="viewcode-block" id="datos_actualizados_placas">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.datos_actualizados_placas">[documentos]</a>
+<span class="k">def</span> <span class="nf">datos_actualizados_placas</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+    <span class="n">project</span><span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;project&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">items</span> <span class="o">=</span>  <span class="n">ProjectSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">project</span> <span class="o">=</span> <span class="n">project</span><span class="p">)</span> 
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;buscar&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">queryset</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">queryset</span> <span class="o">==</span> <span class="s1">&#39;_&#39;</span><span class="p">:</span>
+        <span class="n">palabras</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">condiciones_busqueda</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">palabras</span><span class="p">:</span>
+            <span class="n">condicion</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">palabra</span><span class="p">)</span>
+            <span class="n">condicion2</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">description__icontains</span><span class="o">=</span><span class="n">palabra</span><span class="p">)</span> 
+            <span class="n">condiciones_busqueda</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condicion</span><span class="p">)</span>
+            <span class="n">condiciones_busqueda</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condicion2</span><span class="p">)</span>
+
+        
+
+        <span class="n">consulta</span> <span class="o">=</span> <span class="n">Q</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">condicion</span> <span class="ow">in</span> <span class="n">condiciones_busqueda</span><span class="p">:</span>
+            <span class="n">consulta</span> <span class="o">|=</span> <span class="n">condicion</span>
+        
+        <span class="n">consulta</span> <span class="o">&amp;=</span> <span class="n">Q</span><span class="p">(</span><span class="n">project</span> <span class="o">=</span> <span class="n">project</span><span class="p">)</span>
+
+        <span class="n">items</span> <span class="o">=</span>  <span class="n">ProjectSlide</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">consulta</span><span class="p">)</span>
+        
+    <span class="n">paginator</span> <span class="o">=</span> <span class="n">Paginator</span><span class="p">(</span><span class="n">items</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+    
+    <span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">)</span>
+        
+        
+    <span class="n">items</span><span class="o">=</span> <span class="n">paginator</span><span class="o">.</span><span class="n">get_page</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+    <span class="n">nombres</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">]</span>
+    <span class="n">idList</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">nombres</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="n">idList</span><span class="p">},</span> <span class="n">safe</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  </div>
+
+
+
+
+<div class="viewcode-block" id="datos_actualizados_colaboradores">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.datos_actualizados_colaboradores">[documentos]</a>
+<span class="k">def</span> <span class="nf">datos_actualizados_colaboradores</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;buscar&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">itemsBuscar</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">nombres</span><span class="o">=</span> <span class="kc">None</span>
+    <span class="n">idList</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">fullname</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">project</span><span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;project&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="nb">list</span> <span class="o">=</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span> <span class="o">=</span> <span class="n">project</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">queryset</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">queryset</span> <span class="o">==</span> <span class="s1">&#39;_&#39;</span><span class="p">:</span>
+        <span class="n">palabras</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">condiciones_busqueda</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">palabras</span><span class="p">:</span>
+            <span class="n">condicion</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">username__icontains</span><span class="o">=</span><span class="n">palabra</span><span class="p">)</span>
+            <span class="c1"># condicion2 = Q(description__icontains=palabra) </span>
+            <span class="n">condiciones_busqueda</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condicion</span><span class="p">)</span>
+            <span class="c1"># condiciones_busqueda.append(condicion2)</span>
+
+        <span class="n">consulta</span> <span class="o">=</span> <span class="n">Q</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">condicion</span> <span class="ow">in</span> <span class="n">condiciones_busqueda</span><span class="p">:</span>
+            <span class="n">consulta</span> <span class="o">|=</span> <span class="n">condicion</span>
+        <span class="n">shared_user_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">sharedUsers</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">invited_user_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">invitedUsers</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="c1"># Construye la consulta para excluir usuarios por ID</span>
+        <span class="n">exclude</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">shared_user_ids</span><span class="p">)</span> <span class="o">|</span> <span class="n">Q</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">list</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="o">|</span> <span class="n">Q</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">invited_user_ids</span><span class="p">)</span>
+
+        <span class="c1"># Filtra los usuarios basados en la consulta</span>
+        <span class="n">itemsBuscar</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">exclude</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">consulta</span><span class="p">)</span>
+        
+        <span class="n">paginator</span> <span class="o">=</span> <span class="n">Paginator</span><span class="p">(</span><span class="n">itemsBuscar</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>    
+        <span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">)</span>
+        <span class="n">itemsBuscar</span><span class="o">=</span> <span class="n">paginator</span><span class="o">.</span><span class="n">get_page</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+        <span class="n">nombres</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">username</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">itemsBuscar</span><span class="p">]</span>
+        <span class="n">idList</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">itemsBuscar</span><span class="p">]</span>
+        <span class="n">fullname</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">first_name</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">last_name</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">itemsBuscar</span><span class="p">]</span>
+
+    <span class="n">invitedMember</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">invitedUsers</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">nombresInvite</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">username</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">invitedMember</span><span class="p">]</span>
+    <span class="n">idListInvite</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">invitedMember</span><span class="p">]</span>
+    <span class="n">fullnameInvite</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">first_name</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">last_name</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">invitedMember</span><span class="p">]</span>
+
+    <span class="n">ownerID</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span>
+    <span class="n">ownerN</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span>
+
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;fullnameInvite&#39;</span><span class="p">:</span><span class="n">fullnameInvite</span><span class="p">,</span><span class="s1">&#39;nameInvite&#39;</span><span class="p">:</span><span class="n">nombresInvite</span><span class="p">,</span><span class="s1">&#39;fullname&#39;</span><span class="p">:</span><span class="n">fullname</span><span class="p">,</span><span class="s1">&#39;ownerN&#39;</span><span class="p">:</span><span class="n">ownerN</span><span class="p">,</span><span class="s1">&#39;idInvite&#39;</span><span class="p">:</span><span class="n">idListInvite</span><span class="p">,</span><span class="s1">&#39;ownerID&#39;</span><span class="p">:</span><span class="n">ownerID</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">nombres</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="n">idList</span><span class="p">},</span> <span class="n">safe</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  </div>
+
+
+<div class="viewcode-block" id="datos_actualizados_chat">
+<a class="viewcode-back" href="../../modules/Projects.html#Projects.views.datos_actualizados_chat">[documentos]</a>
+<span class="k">def</span> <span class="nf">datos_actualizados_chat</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;buscar&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">itemsBuscar</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">meessages</span><span class="o">=</span> <span class="kc">None</span>
+    <span class="n">messageDate</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">project</span><span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;project&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="nb">list</span> <span class="o">=</span> <span class="n">Message</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">project</span> <span class="o">=</span> <span class="n">project</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;fecha_envio&#39;</span><span class="p">)</span>
+
+    <span class="c1"># if queryset and not queryset == &#39;_&#39;:</span>
+    <span class="c1">#     palabras = queryset.split()</span>
+    <span class="c1">#     condiciones_busqueda = []</span>
+
+    <span class="c1">#     for palabra in palabras:</span>
+    <span class="c1">#         condicion = Q(username__icontains=palabra)</span>
+    <span class="c1">#         # condicion2 = Q(description__icontains=palabra) </span>
+    <span class="c1">#         condiciones_busqueda.append(condicion)</span>
+    <span class="c1">#         # condiciones_busqueda.append(condicion2)</span>
+
+    <span class="c1">#     consulta = Q()</span>
+    <span class="c1">#     for condicion in condiciones_busqueda:</span>
+    <span class="c1">#         consulta |= condicion</span>
+    <span class="c1">#     shared_user_ids = list.sharedUsers.values_list(&#39;id&#39;, flat=True)</span>
+    <span class="c1">#     invited_user_ids = list.invitedUsers.values_list(&#39;id&#39;, flat=True)</span>
+        
+    <span class="c1">#     # Construye la consulta para excluir usuarios por ID</span>
+    <span class="c1">#     exclude = Q(id__in=shared_user_ids) | Q(id=list.user.id) | Q(id__in=invited_user_ids)</span>
+
+    <span class="c1">#     # Filtra los usuarios basados en la consulta</span>
+    <span class="c1">#     itemsBuscar = User.objects.exclude(exclude).filter(consulta)</span>
+        
+    <span class="c1">#     paginator = Paginator(itemsBuscar,9)    </span>
+    <span class="c1">#     page = request.GET.get(&#39;page&#39;)</span>
+    <span class="c1">#     itemsBuscar= paginator.get_page(page)</span>
+    <span class="c1">#     nombres = [item.username for item in itemsBuscar]</span>
+    <span class="c1">#     idList = [item.id for item in itemsBuscar]</span>
+    <span class="c1">#     fullname = [str(item.first_name)+&#39; &#39;+str(item.last_name) for item in itemsBuscar]</span>
+
+    
+    <span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">]</span>
+    <span class="n">meessage</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">contenido</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">]</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="p">[</span><span class="n">timezone</span><span class="o">.</span><span class="n">make_aware</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">fecha_envio</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%I:%M %p&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">]</span>
+    <span class="n">userid</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;meessages&#39;</span><span class="p">:</span><span class="n">meessage</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">name</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">:</span><span class="n">date</span><span class="p">,</span><span class="s1">&#39;userId&#39;</span><span class="p">:</span><span class="n">userid</span><span class="p">},</span> <span class="n">safe</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  </div>
+
+</pre></div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, PRIS-Lab.
+      Creado usando <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

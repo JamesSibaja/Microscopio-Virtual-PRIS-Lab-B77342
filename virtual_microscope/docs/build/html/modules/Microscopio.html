@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Microscopio package &#8212; documentación de Microscopio Virtual - 1.0.0</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/scrolls.css?v=b5349046" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script src="../_static/documentation_options.js?v=36c4ab74"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../_static/theme_extras.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+  </head><body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="../index.html"
+          title="back to the documentation overview"><span>Microscopio package</span></a></h1>
+      </div>
+      <div class="relnav" role="navigation" aria-label="related navigation">
+        <a href="#">Microscopio package</a>
+      </div>
+      <div id="contentwrapper">
+        <div id="toc" role="navigation" aria-label="table of contents navigation">
+          <h3>Tabla de contenido</h3>
+          <ul>
+<li><a class="reference internal" href="#">Microscopio package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-Microscopio.admin">Microscopio.admin module</a></li>
+<li><a class="reference internal" href="#module-Microscopio.apps">Microscopio.apps module</a><ul>
+<li><a class="reference internal" href="#Microscopio.apps.MicroscopioConfig"><code class="docutils literal notranslate"><span class="pre">MicroscopioConfig</span></code></a><ul>
+<li><a class="reference internal" href="#Microscopio.apps.MicroscopioConfig.name"><code class="docutils literal notranslate"><span class="pre">MicroscopioConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Microscopio.forms">Microscopio.forms module</a><ul>
+<li><a class="reference internal" href="#Microscopio.forms.SlideForm"><code class="docutils literal notranslate"><span class="pre">SlideForm</span></code></a><ul>
+<li><a class="reference internal" href="#Microscopio.forms.SlideForm.Meta"><code class="docutils literal notranslate"><span class="pre">SlideForm.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#Microscopio.forms.SlideForm.Meta.fields"><code class="docutils literal notranslate"><span class="pre">SlideForm.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.forms.SlideForm.Meta.labels"><code class="docutils literal notranslate"><span class="pre">SlideForm.Meta.labels</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.forms.SlideForm.Meta.model"><code class="docutils literal notranslate"><span class="pre">SlideForm.Meta.model</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Microscopio.forms.SlideForm.base_fields"><code class="docutils literal notranslate"><span class="pre">SlideForm.base_fields</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.forms.SlideForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">SlideForm.declared_fields</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.forms.SlideForm.media"><code class="docutils literal notranslate"><span class="pre">SlideForm.media</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Microscopio.forms.UploadFileForm"><code class="docutils literal notranslate"><span class="pre">UploadFileForm</span></code></a><ul>
+<li><a class="reference internal" href="#Microscopio.forms.UploadFileForm.base_fields"><code class="docutils literal notranslate"><span class="pre">UploadFileForm.base_fields</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.forms.UploadFileForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">UploadFileForm.declared_fields</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.forms.UploadFileForm.media"><code class="docutils literal notranslate"><span class="pre">UploadFileForm.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Microscopio.models">Microscopio.models module</a><ul>
+<li><a class="reference internal" href="#Microscopio.models.OpenSlide"><code class="docutils literal notranslate"><span class="pre">OpenSlide</span></code></a><ul>
+<li><a class="reference internal" href="#Microscopio.models.OpenSlide.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">OpenSlide.DoesNotExist</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.OpenSlide.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">OpenSlide.MultipleObjectsReturned</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.OpenSlide.assembled"><code class="docutils literal notranslate"><span class="pre">OpenSlide.assembled</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.OpenSlide.get_absolute_url"><code class="docutils literal notranslate"><span class="pre">OpenSlide.get_absolute_url()</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.OpenSlide.id"><code class="docutils literal notranslate"><span class="pre">OpenSlide.id</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.OpenSlide.name"><code class="docutils literal notranslate"><span class="pre">OpenSlide.name</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.OpenSlide.objects"><code class="docutils literal notranslate"><span class="pre">OpenSlide.objects</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.OpenSlide.path"><code class="docutils literal notranslate"><span class="pre">OpenSlide.path</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.OpenSlide.slide_set"><code class="docutils literal notranslate"><span class="pre">OpenSlide.slide_set</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Microscopio.models.Slide"><code class="docutils literal notranslate"><span class="pre">Slide</span></code></a><ul>
+<li><a class="reference internal" href="#Microscopio.models.Slide.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Slide.DoesNotExist</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Slide.MultipleObjectsReturned</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.assembled"><code class="docutils literal notranslate"><span class="pre">Slide.assembled</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.description"><code class="docutils literal notranslate"><span class="pre">Slide.description</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.getAbsoluteUrl"><code class="docutils literal notranslate"><span class="pre">Slide.getAbsoluteUrl()</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.get_absolute_url"><code class="docutils literal notranslate"><span class="pre">Slide.get_absolute_url()</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.id"><code class="docutils literal notranslate"><span class="pre">Slide.id</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.image"><code class="docutils literal notranslate"><span class="pre">Slide.image</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.name"><code class="docutils literal notranslate"><span class="pre">Slide.name</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.objects"><code class="docutils literal notranslate"><span class="pre">Slide.objects</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.path"><code class="docutils literal notranslate"><span class="pre">Slide.path</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.projectslide_set"><code class="docutils literal notranslate"><span class="pre">Slide.projectslide_set</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.rawSlide"><code class="docutils literal notranslate"><span class="pre">Slide.rawSlide</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.rawSlide_id"><code class="docutils literal notranslate"><span class="pre">Slide.rawSlide_id</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.zoomI"><code class="docutils literal notranslate"><span class="pre">Slide.zoomI</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.models.Slide.zoomM"><code class="docutils literal notranslate"><span class="pre">Slide.zoomM</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Microscopio.tasks">Microscopio.tasks module</a></li>
+<li><a class="reference internal" href="#module-Microscopio.tests">Microscopio.tests module</a></li>
+<li><a class="reference internal" href="#module-Microscopio.urls">Microscopio.urls module</a></li>
+<li><a class="reference internal" href="#module-Microscopio.views">Microscopio.views module</a><ul>
+<li><a class="reference internal" href="#Microscopio.views.catalogo"><code class="docutils literal notranslate"><span class="pre">catalogo()</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.views.micro"><code class="docutils literal notranslate"><span class="pre">micro</span></code></a><ul>
+<li><a class="reference internal" href="#Microscopio.views.micro.model"><code class="docutils literal notranslate"><span class="pre">micro.model</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.views.micro.template_name"><code class="docutils literal notranslate"><span class="pre">micro.template_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Microscopio.views.microfull"><code class="docutils literal notranslate"><span class="pre">microfull</span></code></a><ul>
+<li><a class="reference internal" href="#Microscopio.views.microfull.model"><code class="docutils literal notranslate"><span class="pre">microfull.model</span></code></a></li>
+<li><a class="reference internal" href="#Microscopio.views.microfull.template_name"><code class="docutils literal notranslate"><span class="pre">microfull.template_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Microscopio.views.upload_file"><code class="docutils literal notranslate"><span class="pre">upload_file()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Microscopio">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <div role="main">
+        
+  <section id="microscopio-package">
+<h1>Microscopio package<a class="headerlink" href="#microscopio-package" title="Link to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Microscopio.migrations.html">Microscopio.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Microscopio.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Microscopio.migrations.html#module-Microscopio.migrations.0001_initial">Microscopio.migrations.0001_initial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Microscopio.migrations.html#Microscopio.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Microscopio.migrations.html#Microscopio.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Microscopio.migrations.html#Microscopio.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Microscopio.migrations.html#Microscopio.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Microscopio.migrations.html#module-Microscopio.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-Microscopio.admin">
+<span id="microscopio-admin-module"></span><h2>Microscopio.admin module<a class="headerlink" href="#module-Microscopio.admin" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-Microscopio.apps">
+<span id="microscopio-apps-module"></span><h2>Microscopio.apps module<a class="headerlink" href="#module-Microscopio.apps" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Microscopio.apps.MicroscopioConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Microscopio.apps.</span></span><span class="sig-name descname"><span class="pre">MicroscopioConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Microscopio/apps.html#MicroscopioConfig"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Microscopio.apps.MicroscopioConfig" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.apps.MicroscopioConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Microscopio'</span></em><a class="headerlink" href="#Microscopio.apps.MicroscopioConfig.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Microscopio.forms">
+<span id="microscopio-forms-module"></span><h2>Microscopio.forms module<a class="headerlink" href="#module-Microscopio.forms" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Microscopio.forms.SlideForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Microscopio.forms.</span></span><span class="sig-name descname"><span class="pre">SlideForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Microscopio/forms.html#SlideForm"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Microscopio.forms.SlideForm" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Microscopio.forms.SlideForm.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="../_modules/Microscopio/forms.html#SlideForm.Meta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Microscopio.forms.SlideForm.Meta" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.forms.SlideForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['name',</span> <span class="pre">'description']</span></em><a class="headerlink" href="#Microscopio.forms.SlideForm.Meta.fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.forms.SlideForm.Meta.labels">
+<span class="sig-name descname"><span class="pre">labels</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">'Descripción',</span> <span class="pre">'name':</span> <span class="pre">'Titulo'}</span></em><a class="headerlink" href="#Microscopio.forms.SlideForm.Meta.labels" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.forms.SlideForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Microscopio.forms.SlideForm.Meta.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Microscopio.models.Slide" title="Microscopio.models.Slide"><code class="xref py py-class docutils literal notranslate"><span class="pre">Slide</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.forms.SlideForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#Microscopio.forms.SlideForm.base_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.forms.SlideForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#Microscopio.forms.SlideForm.declared_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="Microscopio.forms.SlideForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#Microscopio.forms.SlideForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Microscopio.forms.UploadFileForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Microscopio.forms.</span></span><span class="sig-name descname"><span class="pre">UploadFileForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Microscopio/forms.html#UploadFileForm"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Microscopio.forms.UploadFileForm" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Form</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.forms.UploadFileForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#Microscopio.forms.UploadFileForm.base_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.forms.UploadFileForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#Microscopio.forms.UploadFileForm.declared_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="Microscopio.forms.UploadFileForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#Microscopio.forms.UploadFileForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Microscopio.models">
+<span id="microscopio-models-module"></span><h2>Microscopio.models module<a class="headerlink" href="#module-Microscopio.models" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Microscopio.models.OpenSlide">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Microscopio.models.</span></span><span class="sig-name descname"><span class="pre">OpenSlide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assembled</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Microscopio/models.html#OpenSlide"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Microscopio.models.OpenSlide" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Microscopio.models.OpenSlide.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Microscopio.models.OpenSlide.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Microscopio.models.OpenSlide.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Microscopio.models.OpenSlide.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.OpenSlide.assembled">
+<span class="sig-name descname"><span class="pre">assembled</span></span><a class="headerlink" href="#Microscopio.models.OpenSlide.assembled" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Microscopio.models.OpenSlide.get_absolute_url">
+<span class="sig-name descname"><span class="pre">get_absolute_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Microscopio/models.html#OpenSlide.get_absolute_url"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Microscopio.models.OpenSlide.get_absolute_url" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.OpenSlide.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Microscopio.models.OpenSlide.id" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.OpenSlide.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#Microscopio.models.OpenSlide.name" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.OpenSlide.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Microscopio.models.OpenSlide.objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.OpenSlide.path">
+<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#Microscopio.models.OpenSlide.path" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.OpenSlide.slide_set">
+<span class="sig-name descname"><span class="pre">slide_set</span></span><a class="headerlink" href="#Microscopio.models.OpenSlide.slide_set" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Microscopio.models.Slide">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Microscopio.models.</span></span><span class="sig-name descname"><span class="pre">Slide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assembled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rawSlide</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoomI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoomM</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Microscopio/models.html#Slide"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Microscopio.models.Slide" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Microscopio.models.Slide.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Microscopio.models.Slide.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.assembled">
+<span class="sig-name descname"><span class="pre">assembled</span></span><a class="headerlink" href="#Microscopio.models.Slide.assembled" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#Microscopio.models.Slide.description" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.getAbsoluteUrl">
+<span class="sig-name descname"><span class="pre">getAbsoluteUrl</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Microscopio/models.html#Slide.getAbsoluteUrl"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Microscopio.models.Slide.getAbsoluteUrl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.get_absolute_url">
+<span class="sig-name descname"><span class="pre">get_absolute_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Microscopio/models.html#Slide.get_absolute_url"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Microscopio.models.Slide.get_absolute_url" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Microscopio.models.Slide.id" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.image">
+<span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#Microscopio.models.Slide.image" title="Link to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#Microscopio.models.Slide.name" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Microscopio.models.Slide.objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.path">
+<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#Microscopio.models.Slide.path" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.projectslide_set">
+<span class="sig-name descname"><span class="pre">projectslide_set</span></span><a class="headerlink" href="#Microscopio.models.Slide.projectslide_set" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.rawSlide">
+<span class="sig-name descname"><span class="pre">rawSlide</span></span><a class="headerlink" href="#Microscopio.models.Slide.rawSlide" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.rawSlide_id">
+<span class="sig-name descname"><span class="pre">rawSlide_id</span></span><a class="headerlink" href="#Microscopio.models.Slide.rawSlide_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.zoomI">
+<span class="sig-name descname"><span class="pre">zoomI</span></span><a class="headerlink" href="#Microscopio.models.Slide.zoomI" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.models.Slide.zoomM">
+<span class="sig-name descname"><span class="pre">zoomM</span></span><a class="headerlink" href="#Microscopio.models.Slide.zoomM" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Microscopio.tasks">
+<span id="microscopio-tasks-module"></span><h2>Microscopio.tasks module<a class="headerlink" href="#module-Microscopio.tasks" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-Microscopio.tests">
+<span id="microscopio-tests-module"></span><h2>Microscopio.tests module<a class="headerlink" href="#module-Microscopio.tests" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-Microscopio.urls">
+<span id="microscopio-urls-module"></span><h2>Microscopio.urls module<a class="headerlink" href="#module-Microscopio.urls" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-Microscopio.views">
+<span id="microscopio-views-module"></span><h2>Microscopio.views module<a class="headerlink" href="#module-Microscopio.views" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="Microscopio.views.catalogo">
+<span class="sig-prename descclassname"><span class="pre">Microscopio.views.</span></span><span class="sig-name descname"><span class="pre">catalogo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Microscopio/views.html#catalogo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Microscopio.views.catalogo" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Microscopio.views.micro">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Microscopio.views.</span></span><span class="sig-name descname"><span class="pre">micro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Microscopio/views.html#micro"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Microscopio.views.micro" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.views.micro.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Microscopio.views.micro.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Microscopio.models.Slide" title="Microscopio.models.Slide"><code class="xref py py-class docutils literal notranslate"><span class="pre">Slide</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.views.micro.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Microscopio/microscopio.html'</span></em><a class="headerlink" href="#Microscopio.views.micro.template_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Microscopio.views.microfull">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Microscopio.views.</span></span><span class="sig-name descname"><span class="pre">microfull</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Microscopio/views.html#microfull"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Microscopio.views.microfull" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.views.microfull.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Microscopio.views.microfull.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias de <a class="reference internal" href="#Microscopio.models.Slide" title="Microscopio.models.Slide"><code class="xref py py-class docutils literal notranslate"><span class="pre">Slide</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Microscopio.views.microfull.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Microscopio/microscopiofull.html'</span></em><a class="headerlink" href="#Microscopio.views.microfull.template_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Microscopio.views.upload_file">
+<span class="sig-prename descclassname"><span class="pre">Microscopio.views.</span></span><span class="sig-name descname"><span class="pre">upload_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/Microscopio/views.html#upload_file"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#Microscopio.views.upload_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-Microscopio">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Microscopio" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, PRIS-Lab.
+      Creado usando <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>
