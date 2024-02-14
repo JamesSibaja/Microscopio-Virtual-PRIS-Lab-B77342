@@ -11,6 +11,7 @@ setup:
 	sudo apt-get install python3-pip
 	sudo apt-get install python3-venv
 	python3 -m venv virtual_microscope/venv
+	touch .env
 	. virtual_microscope/venv/bin/activate && pip install --upgrade pip
 	
 	sudo docker compose build redis db gunicorn daphne celery nginx
