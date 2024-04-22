@@ -194,7 +194,7 @@ DATABASES = {
         'NAME': 'microscopio',
         'USER': 'postgres',
         'PASSWORD': 'microVirtual',
-        'HOST': 'db',
+        'HOST': 'db_vm',
         'PORT': '5432',
         'OPTIONS': {
             'options': '-c timezone=UTC',
