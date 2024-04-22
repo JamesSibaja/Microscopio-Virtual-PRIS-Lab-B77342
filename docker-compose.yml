@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  db:
+  db_vm:
     image: postgres:latest
     environment:
       POSTGRES_DB: microscopio
@@ -12,10 +12,10 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     networks:
-      - mynetwork
+      - mynetwork_vm
 
 
-  daphne:
+  daphne_vm:
     build:
       context: .
       dockerfile: Dockerfile.daphne
@@ -24,15 +24,15 @@ services:
     expose:
       - "8089"
     depends_on:
-      - db
-      - redis
-      - gunicorn
+      - db_vm
+      - redis_vm
+      - gunicorn_vm
     networks:
-      - mynetwork
+      - mynetwork_vm
     links:
-      - redis
+      - redis_vm
 
-  gunicorn:
+  gunicorn_vm:
     build:
       context: .
       dockerfile: Dockerfile.gunicorn
@@ -41,34 +41,34 @@ services:
     expose:
       - "8765"
     depends_on:
-      - db
-      - redis
+      - db_vm
+      - redis_vm
     networks:
-      - mynetwork
+      - mynetwork_vm
 
-  celery:
+  celery_vm:
     build:
       context: .
       dockerfile: Dockerfile.celery
     volumes:
       - ./virtual_microscope:/app
     depends_on:
-      - redis 
-      - gunicorn
+      - redis_vm 
+      - gunicorn_vm
     env_file:
       - .env
     networks:
-      - mynetwork
+      - mynetwork_vm
 
-  redis:
+  redis_vm:
     image: redis:latest
     ports:
       - "6379:6379"
     command: redis-server --bind 0.0.0.0
     networks:
-      - mynetwork
+      - mynetwork_vm
 
-  documentation:
+  documentation_vm:
     build:
       context: .
       dockerfile: Dockerfile.docs
@@ -76,9 +76,9 @@ services:
       - .:/app
     command: make -C docs html
     networks:
-      - mynetwork
+      - mynetwork_vm
 
-  nginx:
+  nginx_vm:
     image: nginx:latest
     ports:
       - mode: host
@@ -89,14 +89,14 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./virtual_microscope:/app
     depends_on:
-      - daphne
-      - gunicorn
+      - daphne_vm
+      - gunicorn_vm
       # - uvicorn
     networks:
-      - mynetwork
+      - mynetwork_vm
 
 networks:
-  mynetwork:
+  mynetwork_vm:
     driver: bridge
 
 volumes:
