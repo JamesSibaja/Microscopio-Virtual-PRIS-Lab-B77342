@@ -179,6 +179,73 @@
             });
             Dropzone.autoDiscover = false;
             $(document).ready(function () {
+                // var myDropzone = new Dropzone("#my-dropzone", {
+                //     url: "{% url 'upload_file' %}",
+                //     paramName: "file",
+                //     maxFilesize:32768,
+                //     maxFiles: 1,
+                //     // chunking: true,
+                //     parallelUploads: 1,
+                //     init: function () {
+                //         this.on("success", function (file, response) {
+                //             alert(response.message);
+                //             // Recargar la página después de una carga exitosa
+                //             location.reload();
+                //         });
+                //                 this.on("error", function(file, errorMessage) {
+                //             console.log(errorMessage); // Muestra mensaje de error si lo hay
+                //         });
+                //     }
+                // });
+                // $("#submit-button").click(function() {
+                //     // Procesar la cola de archivos de Dropzone
+                //     myDropzone.processQueue();
+                // });
+                var chunkSize = 10 * 1024 * 1024; // 10 MB (tamaño del chunk)
+                var startByte = 0;
+                
+                // var myDropzone = new Dropzone("#my-dropzone", {
+                //     url: "{% url 'upload_file' %}",
+                //     paramName: "file",
+                //     chunking: false,
+                //     chunkSize: chunkSize,
+                //     maxFilesize:32768,
+                //     parallelChunkUploads: true,
+                //     retryChunks: true,
+                //     retryChunksLimit: 3,
+                //     init: function () {
+                //         this.on("uploadprogress", function (file, progress) {
+                //             console.log("Progress: " + progress + "%");
+                //         });
+                //         this.on("error", function (file, errorMessage) {
+                //             console.log(errorMessage); // Muestra mensaje de error si lo hay
+                //         });
+                //         this.on("success", function (file, response) {
+                //             console.log(response.message); // Mensaje de éxito
+                //         });
+                //         this.on("chunking_complete", function (file) {
+                //             console.log("Chunking complete for file: " + file.name);
+                //         });
+                //     },
+                //     chunking_upload_before_chunk_upload: function (file, chunk) {
+                //         chunk.data.startByte = startByte;
+                //         startByte += chunkSize;
+                //     },
+                //     chunksUploaded: function (file, done) {
+                //         // Resetear startByte para el siguiente archivo
+                //         startByte = 0;
+                //         // done();
+                //     }
+                // });
+            
+            //     $("#submit-button").click(function () {
+            //         // Procesar la cola de archivos de Dropzone
+            //         myDropzone.processQueue();
+            //     });
+            // });
+            
+            // Dropzone.autoDiscover = false;
+            // $(document).ready(function () {
                 var myDropzone = new Dropzone("#my-dropzone", {
                     url: "{% url 'upload_file' %}",
                     paramName: "file",
@@ -192,7 +259,7 @@
                             // Recargar la página después de una carga exitosa
                             location.reload();
                         });
-                                this.on("error", function(file, errorMessage) {
+                            this.on("error", function(file, errorMessage) {
                             console.log(errorMessage); // Muestra mensaje de error si lo hay
                         });
                     }
@@ -202,7 +269,6 @@
                     myDropzone.processQueue();
                 });
             });
-            
         </script>
     
 {% endblock %}

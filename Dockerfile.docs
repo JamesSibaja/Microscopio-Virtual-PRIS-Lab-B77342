@@ -7,7 +7,14 @@ FROM python:3.10.12
 WORKDIR /app
 
 # Copiar solo los archivos necesarios para la generación de documentación
-COPY ./virtual_microscope /app
+# COPY ./virtual_microscope /app
+
+# Copiar solo los archivos necesarios para la generación de documentación
+COPY ./docs /app/docs
+COPY ./virtual_microscope/manage.py /app/manage.py
+COPY ./virtual_microscope/microscope /app/microscope
+COPY ./virtual_microscope/website_management /app/website_management
+COPY ./virtual_microscope/projects /app/projects
 
 # Instalar Sphinx y las dependencias específicas para la generación de documentación
 RUN pip install --no-cache-dir sphinx \

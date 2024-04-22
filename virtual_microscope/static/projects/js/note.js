@@ -8,6 +8,10 @@ $(document).ready(function() {
     var cerrarModal3 = document.getElementById('cerrarModal3');
     var cerrarModal4 = document.getElementById('cerrarModal4');
     var contenedor = document.getElementById('menuPrincipal');
+    var pos11 = document.getElementById('pos11');
+    var ps12 = document.getElementById('pos12');
+    var pos21 = document.getElementById('pos21');
+    var pos22 = document.getElementById('pos22');
     var dataMap = initializeMap(slideMap,'l','m','d','f','s','c','v');
     var drawnItems = dataMap[1];
     var map = dataMap[0];
@@ -156,7 +160,7 @@ $(document).ready(function() {
 
     var pos = map.getBounds();
 
-    var pos11,ps12,pos21,pos22
+    // pos11,ps12,pos21,pos22
 
     var popup = L.popup();    
     function onMapClick(e) {

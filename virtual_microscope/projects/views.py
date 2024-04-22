@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404,render, redirect              
 from django.views.generic import CreateView
 from django.views import generic
 from django.template import Template, context
@@ -14,9 +14,10 @@ from django.core.paginator import Paginator
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from .decorators import user_is_project_collaborator 
+from django.http import HttpResponse
 
 
-
+HttpResponse
 
 class projects(generic.ListView,FormView,):
     template_name = "projects/projectList.html"
@@ -396,19 +397,41 @@ def deleteNota(request, nota_id):
     return redirect(new_url)
 
 
+# def deleteProject(request, project_id):
+#     instancia = Project.objects.get(id=project_id)
+#     new_url = 'project-list'
+#     instancia.delete()
+
+#     return redirect(new_url)
+
+# @login_required
 def deleteProject(request, project_id):
-    instancia = Project.objects.get(id=project_id)
-    new_url = 'project-list'
-    instancia.delete()
+    project = get_object_or_404(Project, id=project_id)
+    # Verificar si el usuario es el propietario del proyecto
+    if request.user == project.user:
+        project.delete()
+        return redirect('project-list')  # O redirige a donde sea necesario después de borrar el proyecto
+    else:
+        # Devuelve una respuesta de error o redirige a otra página
+        return HttpResponse("No tienes permiso para borrar este proyecto.")
 
-    return redirect(new_url)
+# def deleteProjectSlide(request, project_id):
+#     instancia = ProjectSlide.objects.get(id=project_id)
+#     new_url = instancia.project.get_absolute_url()
+#     instancia.delete()deleteSlide
 
-def deleteProjectSlide(request, project_id):
-    instancia = ProjectSlide.objects.get(id=project_id)
-    new_url = instancia.project.get_absolute_url()
-    instancia.delete()
+#     return redirect(new_url)
 
-    return redirect(new_url)
+# @login_required
+def deleteProjectSlide(request, slide_id):
+    slide = get_object_or_404(ProjectSlide, id=slide_id)
+    # Verificar si el usuario es miembro del proyecto asociado al slide
+    if request.user in slide.project.sharedUsers.all():
+        slide.delete()
+        return redirect('project-list')  # O redirige a donde sea necesario después de borrar el slide
+    else:
+        # Devuelve una respuesta de error o redirige a otra página
+        return HttpResponse("No tienes permiso para borrar este slide.")
 
 def showNote(request,project_id, note_id):
     note = Notes.objects.get(id=note_id)

@@ -24,5 +24,6 @@ urlpatterns = [
     path('micro/<pk>/',micro.as_view(),name='micro-slide'),
     path('upload_file/', admin_required(views.upload_file), name='upload_file'),
     path('processing/', admin_required(views.processing), name='processing'),
+    # path('deleteSlide/<int:slide_id>', deleteSlide),
     path('delete/<int:slide_id>', admin_required(delete))
 ]

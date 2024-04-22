@@ -8,6 +8,7 @@ from django.urls import reverse
 class OpenSlide(models.Model):
     name = models.CharField(unique=True, max_length=50)
     path = models.CharField(max_length=50,null=True)
+    # file = models.FileField(max_length=50,null=True)
     assembled = models.BooleanField(default=False)
 
     def __str__(self):

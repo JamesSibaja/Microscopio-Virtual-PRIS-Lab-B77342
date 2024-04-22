@@ -10,6 +10,8 @@ from django.views.generic.edit import FormView
 from .forms import  UploadFileForm, SlideForm
 from .tasks import convert_to_tiles
 from django.http import JsonResponse
+from django.http import HttpResponse
+from django.core.files.base import ContentFile
 import os
 import logging
 
@@ -55,42 +57,102 @@ def catalogo(request):
 
     return render(request,"microscope/catalogo.html",{'catalogo':catalogo})
 
-# class FileUploadView(FormView):
-#     template_name = 'Microscopio/subir_archivo.html'
-#     form_class = FileUploadForm
-#     success_url = '/subir-archivo/'  # Cambia esto a la URL a la que deseas redirigir después de subir el archivo
+def deleteSlide(request, project_id):
+    instancia = Project.objects.get(id=project_id)
+    new_url = 'project-list'
+    instancia.delete()
 
-#     def form_valid(self, form):
-#         # Aquí puedes agregar la lógica para manejar el archivo subido, por ejemplo, guardarlo en el servidor
-#         return super().form_valid(form)
-    
-# from django.shortcuts import render
-# from .models import Archivo
+    return redirect(new_url)
 
+# def upload_file(request):
+#     listSlide = OpenSlide.objects.filter( assembled=False).distinct()
 
-# def subir_archivo(request):
 
 #     if request.method == 'POST':
-#         form = SlideForm(request.POST, request.FILES) 
-#         if form.is_valid():
-#             instancia = form.save(commit=False)
-#             instancia.image = 'archivo/' + instancia.name
-#             instancia.path = 'media/slide/slide' +str(instancia.id)
-#             instancia.save()
-#             archivo = request.FILES['file']
+#         option = int(request.POST.get('option'))
+#         if(option == 1):
+#             uploaded_file = request.FILES['file']
+#             name = uploaded_file.name + '_' + str(OpenSlide.objects.count())
+#             instance = OpenSlide(name=name)
+#             instance.save()
+#             instance.path = 'media/archivo/' +str(instance.id) + '_' + uploaded_file.name
+#             instance.save()
 
+#             os.makedirs('media/archivo/', exist_ok=True)
 
-#             with open('media/archivo/' + instancia.name + str(instancia.id), 'wb') as destino:
-#                 for chunk in archivo.chunks():
+#             with open('media/archivo/' +str(instance.id)+ '_' + uploaded_file.name, 'wb') as destino:
+#                 for chunk in uploaded_file.chunks():
 #                     destino.write(chunk)
+            
+#             response_data = {'message': 'Archivo cargado exitosamente'}
+#             return JsonResponse(response_data)
         
-        
-#             convert_to_tiles.delay('media/archivo/' +instancia.name + str(instancia.id),'media/slide/slide' +str(instancia.id))
-#             return render(request, 'Microscopio/subir_archivo.html', {'archivo_subido': True,'form':form})
-#     else:
-#         form = SlideForm() 
+#         else:
+#             # logger.info('Hola1')
+#             form = SlideForm(request.POST, request.FILES)
+#             if form.is_valid():
+#                 option = int(request.POST.get('option'))
+#                 rawSlide = OpenSlide.objects.get(id=int(request.POST.get('slide')))
+#                 rawSlide.assembled = True
+#                 rawSlide.save()
+#                 instance = form.save(commit=False)
+#                 instance.save()
+#                 instance.rawSlide = rawSlide
+#                 instance.image = 'slides/slide' +str(instance.id)+'/1/0.jpg'
+#                 instance.path = 'slide' +str(instance.id)
+#                 instance.save()
+#                 logger.info('Hola')
 
-#     return render(request, 'Microscopio/subir_archivo.html', {'archivo_subido': False,'form':form})
+#                 convert_to_tiles.delay(rawSlide.path,'media/slides/slide' +str(instance.id),instance.rawSlide.id,instance.id)
+#             else:
+#                 return JsonResponse(form.errors, status=400)  # Devuelve errores de validación
+
+#     else:
+#         form = SlideForm()
+
+#     return render(request, 'microscope/subir_archivo.html', {'form':form,'listSlide':listSlide})
+
+        # def upload_file(request):
+        #     listSlide = OpenSlide.objects.filter(assembled=False).distinct()
+
+        #     if request.method == 'POST':
+        #         option = int(request.POST.get('option'))
+        #         if option == 1:
+        #             uploaded_file = request.FILES['file']
+        #             name = uploaded_file.name + '_' + str(OpenSlide.objects.count())
+        #             instance = OpenSlide(name=name)
+        #             instance.save()
+
+        #             file_content = b''
+        #             for chunk in uploaded_file.chunks():
+        #                 file_content += chunk
+
+        #             instance.file_field.save(uploaded_file.name, ContentFile(file_content))
+        #             instance.save()
+
+        #             response_data = {'message': 'Archivo cargado exitosamente'}
+        #             return JsonResponse(response_data)
+
+        #         else:
+        #             form = SlideForm(request.POST, request.FILES)
+        #             if form.is_valid():
+        #                 rawSlide = OpenSlide.objects.get(id=int(request.POST.get('slide')))
+        #                 rawSlide.assembled = True
+        #                 rawSlide.save()
+        #                 instance = form.save(commit=False)
+        #                 instance.rawSlide = rawSlide
+        #                 instance.image = 'slides/slide' + str(instance.id) + '/1/0.jpg'
+        #                 instance.path = 'slide' + str(instance.id)
+        #                 instance.save()
+
+        #                 convert_to_tiles.delay(rawSlide.path, 'media/slides/slide' + str(instance.id), instance.rawSlide.id, instance.id)
+        #             else:
+        #                 return JsonResponse(form.errors, status=400)  
+
+        #     else:
+        #         form = SlideForm()
+
+        #     return render(request, 'microscope/subir_archivo.html', {'form':form, 'listSlide':listSlide})
 
 def upload_file(request):
     listSlide = OpenSlide.objects.filter( assembled=False).distinct()

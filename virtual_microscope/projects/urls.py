@@ -13,7 +13,7 @@ urlpatterns = [
     path('noteDetail/<int:pk>/<int:project_id>',login_required(noteDetail.as_view()),name='note-detail'),
     path('deleteNota/<int:nota_id>', deleteNota),
     path('deleteProject/<int:project_id>', deleteProject),
-    path('deleteProjectSlide/<int:project_id>', deleteProjectSlide),
+    path('deleteProjectSlide/<int:slide_id>', deleteProjectSlide),
     path('showNote/<int:note_id>/<int:project_id>', showNote),
     path('newProjectUser/<int:project_id>/<int:projectUser_id>', newProjectUser),
     path('deleteProjectUser/<int:project_id>/<int:projectUser_id>', deleteProjectUser),

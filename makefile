@@ -29,10 +29,19 @@ setup:
 	@docker compose exec gunicorn python manage.py shell -c "from django.contrib.auth.models import User; from getpass import getpass; username='postgres'; email='jsibajagranados2@gmail.com'; password=getpass('Enter password for superuser: '); User.objects.create_superuser(username, email, password) if not User.objects.filter(username=username).exists() else print('Superuser already exists')"
 
 	
+init-docs: # docker compose run documentation make -C virtual_microscope/docs html
+	if [ ! -d "./docs" ]; then \
+        mkdir docs; \
+		. virtual_microscope/venv/bin/activate && pip install --upgrade pip; \
+		pip install -U sphinx; \
+        cd docs && sphinx-quickstart; \
+    fi
+	sudo docker compose build documentation	
+
 generate-docs:
-	sudo docker compose build documentation
-	docker compose run documentation make -C virtual_microscope/docs html
-	cd virtual_microscope/docs/build/html && python3 -m http.server 8080
+	docker compose up --no-build -d --no-recreate documentation
+	# docker compose exec documentation make -C /app/docs html
+	cd ./docs/build/html && python3 -m http.server 8080
 
 generate-pdf: generate-docs
 	docker compose run documentation make -C virtual_microscope/docs latexpdf
@@ -50,5 +59,6 @@ run:
 # 	docker compose exec gunicorn python manage.py makemigrations
 # 	docker compose exec gunicorn python manage.py migrate
 
-stop:
+clean:
 	docker compose down
+	rm -rf docs/
