@@ -44,8 +44,8 @@ CSRF_TRUSTED_ORIGINS = ["http://localhost:80"]
 
 
 # Application definition
-CELERY_BROKER_URL =  'redis://redis:6379/0'
-CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+CELERY_BROKER_URL =  'redis://redis_vm:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis_vm:6379/0'
 
  # Cambia esto según la ubicación de tu servidor RabbitMQ
 # CELERY_RESULT_BACKEND = 'django-db+postgresql://postgres:microVirtual@localhost:5432/microscopio' # Cambia esto según tu preferencia
