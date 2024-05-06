@@ -57,9 +57,39 @@ def catalogo(request):
 
     return render(request,"microscope/catalogo.html",{'catalogo':catalogo})
 
-def deleteSlide(request, project_id):
-    instancia = Project.objects.get(id=project_id)
-    new_url = 'project-list'
+def catalogo_edit(request,delete_edit):
+    queryset = request.GET.get('buscar')
+    # ver = request.GET.get('ver')
+    catalogo = Slide.objects.filter( assembled=True)
+    
+    if queryset:
+        palabras = queryset.split()
+        condiciones_busqueda = []
+
+        for palabra in palabras:
+            condicion = Q(name__icontains=palabra)
+            condicion2 = Q(description__icontains=palabra) 
+            condiciones_busqueda.append(condicion)
+            condiciones_busqueda.append(condicion2)
+
+        consulta = Q()
+        for condicion in condiciones_busqueda:
+            consulta |= condicion
+
+        catalogo = Slide.objects.filter(consulta)
+        
+    # paginator = Paginator(catalogo,30)
+
+    paginator = Paginator(catalogo,9)
+    
+    page = request.GET.get('page')
+    catalogo = paginator.get_page(page)
+
+    return render(request,"microscope/catalogo_edit.html",{'catalogo':catalogo})
+
+def deleteSlide(request, slide_id):
+    instancia = Slide.objects.get(id=slide_id)
+    new_url = 'Catalogo_edit'
     instancia.delete()
 
     return redirect(new_url)

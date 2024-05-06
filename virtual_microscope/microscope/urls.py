@@ -1,7 +1,7 @@
 from django.urls import path, re_path
 from django.conf import settings
 from django.conf.urls.static import static
-from microscope.views import catalogo, micro, delete
+from microscope.views import catalogo, micro, delete, deleteSlide, catalogo_edit
 from . import views
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
@@ -21,9 +21,10 @@ def admin_required(view_func):
 
 urlpatterns = [
     path('catalogo/', catalogo, name = "Catalogo"),
+    path('catalogo_edit/<int:delete_edit>/', admin_required(catalogo_edit), name = "Catalogo_edit"),
     path('micro/<pk>/',micro.as_view(),name='micro-slide'),
     path('upload_file/', admin_required(views.upload_file), name='upload_file'),
     path('processing/', admin_required(views.processing), name='processing'),
-    # path('deleteSlide/<int:slide_id>', deleteSlide),
+    path('deleteSlide/<int:slide_id>', admin_required(deleteSlide)),
     path('delete/<int:slide_id>', admin_required(delete))
 ]

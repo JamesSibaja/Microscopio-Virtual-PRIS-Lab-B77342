@@ -37,7 +37,6 @@ DROPZONE_MAX_FILE_SIZE = MAX_UPLOAD_SIZE  # 32 GB en bytes
 DEBUG = False
 
 ALLOWED_HOSTS = ['*'] 
-
 # USE_X_FORWARDED_HOST = True
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_TRUSTED_ORIGINS = ["http://localhost:80"]
@@ -175,7 +174,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('redis', 6379)],
+            "hosts": [('redis_vm', 6379)],
         },
     },
 }
